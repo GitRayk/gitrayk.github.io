@@ -1,0 +1,201 @@
+[
+    {
+        "id": 1,
+        "name": "无事发生",
+        "description": "也许安然度过一年是一件好事？"
+    },
+    {
+        "id": 2,
+        "name": "梦境",
+        "description": "你梦到一位仙风道骨的老人，他似乎对你说了什么。也许有一天你会想起来",
+        "method": "player.xiuxian = 1;"
+    },
+    {
+        "id": 3,
+        "name": "奥数",
+        "description": "你成功拿到了奥数金奖！你全家都会为你骄傲的！",
+        "condition": "function(){return(player.intelligence>=10&&progress<18*eventNumber)}"
+    },
+    {
+        "id": 4,
+        "name": "新闻",
+        "description": "听说这几天你家附近有恐怖分子出没，最近还是不要出门为好",
+        "condition": "function(){return(player.terrorist != undefined)}"
+    },
+    {
+        "id": 5,
+        "name": "新手机",
+        "description": "你花钱买了一部最新款的iphone plus extra pro max，富裕程度降低了",
+        "condition": "function(){return(player.asset>=1);}",
+        "method": "player.asset-=1;"
+    },
+    {
+        "id": 6,
+        "name": "车祸",
+        "description": "你出了车祸",
+        "method": "if(greater(Math.random(),0.4)){gameover('traffic');}"
+    },
+    {
+        "id": 7,
+        "name": "思考",
+        "description": "你开始怀疑这个世界是否真实存在，但你没有任何办法证明"
+    },
+    {
+        "id": 8,
+        "name": "社交",
+        "description": "你交到了新的朋友，今天是很开心的一天"
+    },
+    {
+        "id": 9,
+        "name": "加薪",
+        "description": "你的努力工作成功引起了老板的注意，你的财产增加了",
+        "condition": "function(){return(progress>=5*eventNumber&&progress<=60*eventNumber);}",
+        "method": "player.asset+=1;"
+    },
+    {
+        "id": 10,
+        "name": "学习",
+        "description": "你最近正在努力学习",
+        "condition": "function(){return(progress>=10*eventNumber&&progress<=18*eventNumber);}"
+    },
+    {
+        "id": 11,
+        "name": "尿裤子",
+        "description": "你尿裤子了，真是值得纪念的一天啊",
+        "condition": "function(){return(progress<=10*eventNumber);}"
+    },
+    {
+        "id": 12,
+        "name": "克苏鲁",
+        "description": "你听到有人低语",
+        "condition": "function(){return(player.cthulhu!=undefined);}",
+        "method": "player.san-=1"
+    },
+    {
+        "id": 13,
+        "name": "幸运",
+        "description": "走在路上都能捡到钱，这不是幸运是什么？",
+        "method": "player.asset+=1;"
+    },
+    {
+        "id": 14,
+        "name": "小道消息",
+        "description": "网上有消息流传，某实验室泄漏了一种丧失病毒，也许世界末日不远了"
+    },
+    {
+        "id": 15,
+        "name": "克苏鲁",
+        "description": "你觉得你的精神越来越不好",
+        "condition": "function(){return(player.cthulhu!=undefined);}",
+        "method": "player.san-=1"
+    },
+    {
+        "id": 16,
+        "name": "防空演练",
+        "description": "你所在的城市突然要求进行防空演练"
+    },
+    {
+        "id": 17,
+        "name": "思考",
+        "description": "你开始思考天堂是否真的存在"
+    },
+    {
+        "id": 18,
+        "name": "海鲜",
+        "description": "你打算吃一顿海鲜，然而却不知为何头晕目眩",
+        "condition": "function(){return(player.cthulhu!=undefined);}",
+        "method": "player.san-=1"
+    },
+    {
+        "id": 19,
+        "name": "游戏",
+        "description": "腾讯出了最新款moba游戏：荣耀王者，该游戏备受欢迎"
+    },
+    {
+        "id": 20,
+        "name": "偷外卖",
+        "description": "你点的外卖被人偷走了"
+    },
+    {
+        "id": 21,
+        "name": "盗窃",
+        "description": "不知道什么时候，你的口袋被割破了一个缝隙，里面的钱被偷走了",
+        "condition": "function(){return(player.asset>=1);}",
+        "method": "player.asset-=1"
+    },
+    {
+        "id": 22,
+        "name": "新闻",
+        "description": "科学家声称在水中发现有慢性毒药，喝过水的人都会死"
+    },
+    {
+        "id": 23,
+        "name": "梦境",
+        "description": "你梦到一座海底的城市，好像有什么生物在此沉睡",
+        "condition": "function(){return(player.cthulhu!=undefined);}",
+        "method": "player.san-=1;player.laraye=1"
+    },
+    {
+        "id": 24,
+        "name": "呼吸困难",
+        "description": "你常常感到呼吸困难，只有在水中才感觉自在",
+        "condition": "function(){return(player.cthulhu!=undefined);}",
+        "method": "player.san-=1"
+    },
+    {
+        "id": 25,
+        "name": "疯狂艺术",
+        "description": "你总有疯狂的想法并将其实现为艺术，意外地，你的作品很受欢迎",
+        "condition": "function(){return(player.cthulhu!=undefined);}",
+        "method": "player.asset+=5;player.san-=1;"
+    },
+    {
+        "id": 26,
+        "name": "红包",
+        "description": "你的亲戚来你家拜访你，你收到了许多红包",
+        "method": "player.asset+=5;"
+    },
+    {
+        "id": 27,
+        "name": "克苏鲁的召唤",
+        "description": "你听到来自深渊的召唤，但来自于海螺的声音将你的意识吸引了回来",
+        "condition": "function(){return(player.laraye==2&&player.conch==1);}",
+        "method": "getTips('已完成事件[理智之人]：你没有完全失去理智');player.cthulhuProcess=progress-player.cthulhu;player.cthulhu=undefined;"
+    },
+    {
+        "id": 28,
+        "name": "吃饱了撑的",
+        "description": "你吃的太饱了，感觉到胃有点不适"
+    },
+    {
+        "id": 29,
+        "name": "早睡早起",
+        "description": "你一直保持着良好的作息，皮肤状态非常好",
+        "method": "player.appearence+=1;"
+    },
+    {
+        "id": 30,
+        "name": "新闻",
+        "description": "科学家称已经发现外星生命体，也许将来人类会离开地球，开启星际探索"
+    },
+    {
+        "id": 31,
+        "name": "晕车",
+        "description": "你坐车时吐了一地"
+    },
+    {
+        "id": 32,
+        "name": "新闻",
+        "description": "据观测，一颗超大行星将会在未来十世纪内撞上地球"
+    },
+    {
+        "id": 33,
+        "name": "资讯",
+        "description": "苹果公司即将推出最新款iphone 21"
+    },
+    {
+        "id": 34,
+        "name": "上电视",
+        "description": "你被一个节目随机选为路人代表进行发言，也许你能在电视上看到你自己了"
+    }
+]

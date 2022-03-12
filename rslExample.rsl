@@ -1,0 +1,37 @@
+step welcome
+    speak "你好," $name$
+    speak "试着对我说“你好”、“查询”，或者“反馈”"
+    goto say
+step say
+    listen 10
+    branch "查询" account
+    branch "你好" happy
+    branch "反馈" feedback
+    default unknown
+    silence indifferent
+step happy
+    speak "很高兴认识你^_^"
+    goto end
+step indifferent
+    speak "没事的话我就先离开啦"
+    goto end
+step end
+    speak "再见"
+    exit
+step unknown
+    speak "我听不懂你再说什么"
+    goto previous
+step feedback
+    speak "你对我们的机器人有什么好的建议吗？"
+    listen 30
+    default logging
+    silence indifferent
+    goto end
+step logging
+    speak "你的建议已经被记录下来，感谢你的反馈"
+    log "log.txt"
+    goto end
+step account
+    speak "你的账户余额为" $bill$ "元"
+    speak "请问还有其他事吗"
+    goto say

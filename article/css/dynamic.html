@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../img/icon.png">
+    <link rel="stylesheet" href="../../sheet.css" class="sheet" type="text/css">
+    <link rel="stylesheet" href="../../mobile-sheet.css" type="text/css">
+    <script src="../../skin.js"></script>
+    <title>尼伯龙根</title>
+</head>
+
+<body>
+    <div class="head-title">
+        <a href="../../index.html"><img src="../../img/icon.png" width="30"
+                height="30" alt="icon" style="vertical-align:text-bottom;" /><span style="font-size: 20px;">
+                Niebelungen尼伯龙根</span></a>
+        <span>
+            &nbsp;&nbsp;&nbsp;<a href="../article.html" class="hyperlink"
+                style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+            &nbsp;&nbsp;&nbsp;<a href="../../about/about.html" class="hyperlink" id="about">关于</a>
+        </span>
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="./css-index.html">CSS</a></li>
+                        <li><a href="../html/html-index.html">HTML</a></li>
+                        <li><a href="../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="../program/python/python-index.html">Python</a></li>
+                        <li><a href="../program/c/c-index.html">C/C++</a></li>
+                        <li><a href="../program/others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>CSS - 使用过渡和动画来实现动态效果</h1>
+        <hr>
+        <div class="article-text">
+            <h3>过渡：</h3>
+            <p>
+                <b>当一个属性的值发生变化时（前提条件）</b>，可以设定其变化的过渡持续时间
+                （这里的变化可以是:hover的变化，也可以是js的变化等等）<br>
+                但要注意的是，若属性如width使用百分比表示，当窗口太小变化时，虽然其绝对宽度改变了，但是实际上还是那个百分比值，此时是不会触发过渡的<br>
+                使用<span class="code">transition属性</span>来设定过渡相关的数值<br>
+                几种常用的具体的属性如下：
+            <table>
+                <tr>
+                    <th>属性</th>
+                    <th>值</th>
+                </tr>
+                <tr>
+                    <td>transition-delay</td>
+                    <td>规定过渡开始之前的延迟等待时间，默认是0</td>
+                </tr>
+                <tr>
+                    <td>transition-property</td>
+                    <td>规定过渡的敏感信号，即要应用过渡的属性，默认是所有属性</td>
+                </tr>
+                <tr>
+                    <td>transition-duration</td>
+                    <td>规定过渡持续的时间</td>
+                </tr>
+                <tr>
+                    <td>transition-timing-function</td>
+                    <td>规定过渡效果的速度变化曲线</td>
+                </tr>
+            </table><br>
+            其中常用的速度曲线可以为
+            <table>
+                <tr>
+                    <td>ease</td>
+                    <td>表现为慢-快-慢</td>
+                </tr>
+                <tr>
+                    <td>linear</td>
+                    <td>表现为匀速</td>
+                </tr>
+                <tr>
+                    <td>ease-out</td>
+                    <td>表现为慢-快</td>
+                </tr>
+                <tr>
+                    <td>ease-in</td>
+                    <td>表现为快-慢</td>
+                </tr>
+            </table>
+            </p>
+            <hr>
+            <p>
+                <style>
+                    #colorblock1,#colorblock2 {
+                        background-color: aquamarine;
+                        width: 200px;
+                        height: 150px;
+                        transition: 2s;
+                    }
+                    #colorblock2:hover{
+                        background-color: rgb(255, 127, 127);
+                    }
+                </style>
+                <script>
+                    function changecolor() {
+                        if (document.getElementById('colorblock1').style.backgroundColor == 'aquamarine') {
+                            document.getElementById('colorblock1').style.backgroundColor = 'rgb(255, 127, 127)';
+                        }
+                        else {
+                            document.getElementById('colorblock1').style.backgroundColor = 'aquamarine';
+                        }
+                    }
+                </script>
+                <div style="float: left; margin-right: 20%;">
+                    通过js来控制过渡：
+                    <div id="colorblock1" style="background-color: aquamarine;"></div>
+                    <button onclick="changecolor()">点击</button>
+                </div>
+                <div style="float: left;">
+                    通过 :hover 实现过渡(将鼠标移动到色块上):
+                    <div id="colorblock2"></div>
+                </div>
+            </p>
+            <br style="clear: both;"><hr>
+            <h3>动画</h3>
+            <p>
+                CSS使用<span class="code">@keyframes规则</span>来设定动画代码<br>
+                使用语法为<span class="code">@keyframes 动画名 { css代码 }</span><br>
+                <pre>
+@keyframes 动画名 { css代码 }
+其中css代码使用 from选择器为动画第一帧设定样式<br>
+to选择器为动画的最后一帧设定样式
+也可以使用 百分比 作为选择器表示动画的各个阶段
+                </pre>
+                当设定完动画的相关信息后，为了能够使用动画，要在需要应用该动画的元素中使用以下css属性:
+                <table>
+                    <tr><th>属性</th><th>描述</th></tr>
+                    <tr><td>animation-name</td><td>指定要应用的动画名</td></tr>
+                    <tr><td>animation-duration</td><td>指定动画的持续时间</td></tr>
+                    <tr><td>animation-delay</td><td>指定动画开始前的延迟时间（仅第一次播放前）</td></tr>
+                    <tr><td>animation-iteration-count</td><td>指定动画重复的次数，可以设为<b>infinite</b></td></tr>
+                    <tr><td>animation-direction</td><td>指定动画的方向（可以反向播放）</td></tr>
+                    <tr><td>animation-timing-function</td><td>指定动画的速度函数</td></tr>
+                    <tr><td>animation-fill-mode</td><td>指定动画保留的样式</td></tr>
+                    <tr><td>animation-play-state</td><td>控制动画的播放与暂停</td></tr>
+                </table>
+                动画通常不会保留播放状态的任一样式，但使用<span class="code">animation-fill-mode属性</span>之后则会保留<br>
+                其取值规则如下：
+                <table>
+                    <tr><th>值</th><th>意义</th></tr>
+                    <tr><td>none</td><td>缺省的，不保留</td></tr>
+                    <tr><td>forwards</td><td>动画结束后保留最后一帧的样式</td></tr>
+                    <tr><td>backwards</td><td>动画开始前保留第一帧的样式</td></tr>
+                    <tr><td>both</td><td>前面两种的结合</td></tr>
+                </table>
+            </p>
+            <hr><br>
+            <p>
+                <style>
+                    @keyframes swing{
+                        0%, 100%{
+                            transform: rotate(-20deg);
+                        }
+                        50%{
+                            transform: rotate(20deg);
+                        }
+                    }
+                    #mouse{
+                        animation-name: swing;
+                        animation-iteration-count: infinite;
+                        animation-duration: 1s;
+                    }
+                    #mouse:hover{
+                        animation-play-state: paused;
+                    }
+                </style>
+                通过动画使图标动起来：
+                <img src="../../img/click.png" alt="mouse" id="mouse">
+            </p>
+            <hr><br>
+            <p>
+                过渡和动画都可是实现动态效果，但在不做其他设置的情况下有所区别：<br>
+                过渡一定需要在某一属性值变化的时候<br>
+                而动画总是在页面加载好之后就会开始播放
+            </p>
+            <hr><br>
+            <p>
+                要想控制动画的播放，可以使用<span class="code">animation-play-state属性</span><br>
+                将其取值设为 paused（暂停）| running（播放）来控制动画<br>
+                将鼠标移动至上面的摇摆的鼠标来使动画暂停
+            </p>
+            <p>
+                但这种方法对于只重复有限次数的动画来说，没办法重置动画的状态<br>
+                若想重置动画，可以设置两个一模一样的动画效果后用js在它们之间相互切换
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../img/icon.png">
+    <link rel="stylesheet" href="../../sheet.css" type="text/css" class="sheet">
+    <link rel="stylesheet" href="../../mobile-sheet.css" type="text/css">
+    <script src="../../skin.js"></script>
+    <title>FileReader 对象 | 尼伯龙根</title>
+</head>
+
+<body>
+    <div class="head-title">
+        <a href="../../index.html"><img src="../../img/icon.png" width="30" height="30" alt="icon"
+                style="vertical-align:text-bottom;" /><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+            &nbsp;&nbsp;&nbsp;<a href="../article.html" class="hyperlink"
+                style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+            &nbsp;&nbsp;&nbsp;<a href="../../about/about.html" class="hyperlink" id="about">关于</a>
+        </span>
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../img/sun and moon.png" alt="暗夜模式" id="shift-skin"
+                onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../css/css-index.html">CSS</a></li>
+                        <li><a href="../html/html-index.html">HTML</a></li>
+                        <li><a href="./index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="../program/python/python-index.html">Python</a></li>
+                        <li><a href="../program/c/c-index.html">C/C++</a></li>
+                        <li><a href="../program/others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>FileReader 对象</h1>
+        <hr>
+        <div class="article-text">
+            <h4 class="date">2021-10-19</h4>
+            <h3>选择文件</h3>
+            <p>
+                要在 html 中提交文件，需要用到<span class="code">&lt;input type="file"&gt;标签</span>，
+                该标签允许以提交表单的形式选择文件提交。<br>
+            </p>
+            <p>
+                该标签元素的<b>value属性</b>为所选择文件的路径。<br>
+                在默认情况下，该标签只能提交一个文件。<br>
+                在HTML5中，使用<span class="code">multiple="multiple" 或 multiple属性</span>可以同时选择多个文件，
+                此时value将会是第一张文件的路径。若是想要获得文件对象，应使用<span class="code">files属性</span>。<br>
+                该属性是一个文件列表/数组，通过下标来访问不同的文件对象。<br>
+                文件对象具有各个属性可以返回文件的基本信息，如name属性返回文件的名字，type属性返回文件类型
+            </p>
+            <p>
+                &lt;input type="file"&gt;还可以通过<span class="code">accept属性</span>设置可接受的文件类型，多种可接受类型用逗号分割<br>
+                其值应该是字符串，如 ".png" 表示只接受png类型的文件<br>
+                然而，该属性并不会阻止用户真的要选择什么样的文件，只是在选择时默认先列出可接受类型的文件来做一个引导,
+                但后台可以使用正则表达式检查文件后缀或查看文件对象的type属性
+            </p>
+            <hr>
+            <h3>处理文件</h3>
+            <p>
+                要对文件做处理，需要使用FileReader对象<br>
+                FileReader 对象允许Web应用程序异步读取存储在用户计算机上的文件（或原始数据缓冲区）的内容<br>
+                要创建这样一个对象，需要使用<span class="code">new FileReader()</span><br>
+            </p>
+            <p>
+                当有了这样一个对象后，我们可以使用它来读取一个文件对象（input[type="file"].files[]返回的对象）<br>
+                读取文件使用以下方法:
+                <ul>
+                    <li>
+                        <b>FileReader.readAsDataURL() 方法</b><br>
+                        读取指定的 Blob 或 File 对象。读取操作完成 result 属性将包含一个URL格式的字符串（base64编码）以表示所读取文件的内容。
+                    </li>
+                    <li>
+                        <b>FileReader.readAsText() 方法</b><br>
+                        可以将 Blob 或者 File 对象转根据特殊的编码格式转化为内容(字符串形式)，其中第二个参数指定编码形式，默认为utf-8
+                    </li>
+                </ul>
+            </p>
+            <p>
+                读取文件的方法都是异步的，也就是说，在调用读取方法后立即查看 FileReader.result 是没有结果的<br>
+                使用 FileReader.onload 或 onloadend 属性来设置返回结果之后要运行的脚本
+            </p>
+            <p>
+                属性:
+                <table>
+                    <tr><th>属性</th><th>意义</th></tr>
+                    <tr><td>error</td><td>只读，返回读取文件时发生的错误</td></tr>
+                    <tr><td>readyState</td><td>只读，表示FileReader对象当前的状态</td></tr>
+                    <tr><td>result</td><td>只读，表示所读文件的内容。该属性仅在读取操作完成后才有效，数据的格式取决于使用哪个方法来启动读取操作。</td></tr>
+                </table>
+            </p>
+            <p>
+                <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader">点击查看完整事件处理和方法</a>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" width="device-width" initial-scale="0.5">
+</head>
+
+<body onload="birth()">
+    <style>
+        /* general styling */
+        :root {
+            --smaller: 2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            max-width: device-width;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body {
+            align-items: center;
+            background-color: #ffd54f;
+            display: flex;
+            font-family: -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Oxygen-Sans,
+                Ubuntu,
+                Cantarell,
+                "Helvetica Neue",
+                sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            color: #333;
+            margin: 0 auto;
+            text-align: center;
+            width: max-width;
+        }
+
+        h1 {
+            font-weight: normal;
+            letter-spacing: .125rem;
+            text-transform: uppercase;
+            margin-bottom: 70px;
+        }
+
+        li {
+            display: inline-block;
+            font-size: 1.5em;
+            list-style-type: none;
+            padding: 1em;
+            text-transform: uppercase;
+        }
+
+        li span {
+            display: block;
+            font-size: 40px;
+        }
+
+        .emoji {
+            display: none;
+            padding: 10px;
+        }
+
+        .emoji span {
+            font-size: 500%;
+            padding: 10px;
+        }
+
+        #img {
+            position: relative;
+            top: 50px;
+            left: -300px;
+            visibility: hidden;
+            transition-property: all;
+            transition-duration: 2s;
+            opacity: 0;
+        }
+
+        @media all {
+            h1 {
+                font-size: 40px;
+            }
+
+            li {
+                font-size: 30px;
+            }
+
+            li span {
+                font-size: 40px;
+            }
+        }
+
+        a#close {
+            position: absolute;
+            font-size: 50px;
+            top: 10px;
+            right: 10px;
+            text-decoration: none;
+            color: rgb(150, 107, 50);
+        }
+
+        #mail {
+            padding: 50px;
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            margin: 5%;
+            border: solid black 1px;
+            background-color: #fad868;
+            width: auto;
+            max-width: device-width;
+            height: 80%;
+            max-height: device-height;
+            overflow: scroll;
+            transform-origin: bottom;
+            transform: rotate(-20deg);
+            transition-property: all;
+            transition-duration: 2s;
+        }
+
+        #mailContent {
+            margin: 40px 50px 50px 50px;
+            font-size: 50px;
+            font-family: "Gabriola", Arial, Helvetica, sans-serif;
+            text-indent: 2px;
+            line-height: 150%;
+            letter-spacing: 1px;
+            word-break: break-all;
+        }
+    </style>
+
+    <div>
+        <div class="container">
+            <h1 id="headline">Remaining time:</h1>
+            <div id="countdown">
+                <ul>
+                    <li><span id="days"></span>days</li>
+                    <li><span id="hours"></span>Hours</li>
+                    <li><span id="minutes"></span>Minutes</li>
+                    <li><span id="seconds"></span>Seconds</li>
+                </ul>
+            </div>
+            <div id="content" class="emoji">
+                <span>🥳</span>
+                <span>🎉</span>
+                <span>🎂</span><br>
+                <span><a href="javascript:void(openMail());" id="img"><img src="./img/mail.png" width="100px"
+                            height="100px" /></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="mail">
+        <a id="close" href="javascript:void(closeMail())">×</a>
+        <div id="mailContent">
+            <h3>My Best KuCha: </h3>
+            <br>
+            <p>
+                Today is your birthday. Twenty one years ago, you were born. 
+                It's the greatest day on earth.
+            </p>
+            <br>
+            <p>
+                You may have a plain life, but i wish you could be a person without commonness.
+            </p>
+            <br>
+            <p>
+                All in all, I am willing to accompany you in every important moment of your life.
+            </p>
+            <br>
+            <p style="text-align: right;">Yours, friend.</p>
+        </div>
+    </div>
+
+
+</body>
+<script type="text/javascript">
+    function openMail() {
+        let mail = document.getElementById('mail');
+        mail.style.visibility = "visible";
+        mail.style.opacity = 1;
+        mail.style.transform = "rotate(0deg)";
+    };
+
+    function closeMail() {
+        let mail = document.getElementById("mail");
+        mail.style.opacity = 0;
+        mail.style.visibility = "hidden";
+        mail.style.transform = "rotate(-20deg)";
+    }
+
+    function birth() {
+        const second = 1000,
+            minute = second * 60,
+            hour = minute * 60,
+            day = hour * 24;
+
+        //I'm adding this section so I don't have to keep updating this pen every year :-)
+        //remove this if you don't need it
+        let today = new Date(),
+            dd = String(today.getDate()).padStart(2, "0"),
+            mm = String(today.getMonth() + 1).padStart(2, "0"),
+            yyyy = today.getFullYear(),
+            nextYear = yyyy + 1,
+            dayMonth = "10/24/",
+            birthday = dayMonth + yyyy;
+
+        today = mm + "/" + dd + "/" + yyyy;
+        if (today > birthday) {
+            birthday = dayMonth + nextYear;
+        }
+        //end
+
+        const countDown = new Date(birthday).getTime(),
+            x = setInterval(function () {
+
+                const now = new Date().getTime(),
+                    distance = countDown - now;
+
+                document.getElementById("days").innerText = Math.floor(distance / (day)),
+                    document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+                    document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
+                    document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+
+                //do something later when date is reached
+                if (distance < 0) {
+                    document.getElementById("headline").innerHTML = "It's KuCha's birthday!";
+                    document.getElementById("countdown").style.display = "none";
+                    document.getElementById("content").style.display = "block";
+                    //there is no transition if setTimeout does not exist. why?
+                    setTimeout(() => {
+                        let img = document.getElementById("img");
+                        img.style.left = "0px";
+                        img.style.visibility = "visible";
+                        img.style.opacity = 1;
+                    }, 500);
+                    clearInterval(x);
+                }
+                //seconds
+            }, 0)
+    };
+</script>
+
+</html>

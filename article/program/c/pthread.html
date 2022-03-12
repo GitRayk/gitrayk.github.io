@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../../img/icon.png">
+    <link rel="stylesheet" href="../../../sheet.css" type="text/css" class="sheet">
+    <link rel="stylesheet" href="../../../mobile-sheet.css" type="text/css">
+    <script src="../../../skin.js"></script>
+    <title>linux进程 | 尼伯龙根</title>
+</head>
+
+<body id="top">
+    <!--创建一个能跳转到当前页面顶部的按钮-->
+    <a href="#top" class="hyperlink"><div class="gotoTop">Top</div></a>
+
+    <div class="head-title">
+        <a href="../../../index.html"><img src="../../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+		&nbsp;&nbsp;&nbsp;<a href="../../article.html" class="hyperlink" style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+		&nbsp;&nbsp;&nbsp;<a href="../../../about/about.html" class="hyperlink" id="about">关于</a>
+	    </span> 
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+    
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../../css/css-index.html">CSS</a></li>
+                        <li><a href="../../html/html-index.html">HTML</a></li>
+                        <li><a href="../../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="../python/python-index.html">Python</a></li>
+                        <li><a href="./c-index.html">C/C++</a></li>
+                        <li><a href="../others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>C语言线程控制</h1><hr>
+        <div class="article-text">
+            <h4 class="date">2021-10-22</h4>
+            <h3>int pthread_attr_init(pthread_attr_t *attr)：</h3>
+            <p>
+                包含在<span class="code"> pthread.h 头文件 </span>中<br>
+                <b>创建一个线程时，会有一个<span class="code"> pthread_attr_t 结构体 </span>保存线程的相关属性</b><br>
+                包括线程的调度策略、线程栈起始位置和大小、线程的作用域、分离属性等信息。<br>
+                当我们声明了这样的一个结构体，需要用该函数将该结构体进行初始化，当<b>成功初始化时返回0，否则返回非0</b><br>
+                相对的，我们可以销毁一个线程属性结构体：<span class="code"> int pthread_attr_destroy(pthread_attr_t *attr) </span><br>
+                它的使用与 pthread_attr_init 一致，并在成功销毁后返回0，否则返回非0
+            </p>
+            <hr>
+            <h3>int pthread_create(pthread_t *tidp,const pthread_attr_t *attr, void *(*start_rtn)(void*),void *arg);</h3>
+            <p>
+                <!-- <b>该函数是在类Unix操作系统（Unix、Linux、Mac OS X等）的创建线程的函数</b>， -->
+                包含在<span class="code"> pthread.h 头文件 </span>中<br>
+                各参数意义：<br>
+                <ul>
+                    <li>
+                        <b>tidp</b><br>
+                        指向线程标识符的指针，其类型 pthread_t 是定义在 pthread.h 中的宏，一般用来标记线程标识符
+                    </li>
+                    <li>
+                        <b>attr</b><br>
+                        传入线程的属性
+                    </li>
+                    <li><b>start_rtn</b><br>
+                        指向函数的指针，即线程运行的函数的起始地址，也即函数名。void* 类型的指针可以转换成任意类型的指针</li>
+                    <li>
+                        <b>arg</b><br>
+                        线程运行函数的参数，若有多个则需传入结构体
+                    </li>
+                </ul>
+                <b>该函数成功时返回0，出错时返回错误编号</b><br>
+                需要注意的是，因为它非linux的系统库，而是POSIX线程库，<b>在linux环境中编译时需加 -lpthread 或 -pthread </b>
+            </p>
+            <hr>
+            <h3>int pthread_join(pthread_t thread, void **retval):</h3>
+            <p>
+                包含在<span class="code"> pthread.h 头文件 </span>中<br>
+                该函数以阻塞的方式等待thread指定的线程结束。当函数返回时，被等待线程的资源会被收回，返回值储存在第二个参数中。<br>
+                <b>第二个参数类型是void**，但我们应当传入一个指针的地址，而不是真的传入一个指向指针的指针</b><br>
+                如果线程已经结束，那么该函数会立即返回<br>
+                返回值 ： 0代表成功。 失败，返回的则是错误号。<br>
+            </p>
+            <p>
+                <b>（若不使用 pthread_join ，且线程是非分离的，那么系统资源并不会完全真正的释放，也没有真正终止。
+                    所以一般都会用 pthread_join 进行等待）</b><br>
+            </p>
+            <hr>
+            <h3>void pthread_exit(void* retval): </h3>
+            <p>
+                当一个线程要结束的时候，可以像使用 exit() 一样调用该函数。<br>
+                该函数的参数是线程结束时要返回的代码，它会被 pthread_join() 的调用者接收<br>
+                <b>注意！不要将函数栈上的数据回传，因为它会随着函数的结束而销毁</b>
+            </p>
+            <p>
+                事实上，线程退出的方法有三种：<br>
+                return 返回到调用者处<br>
+                pthread_exit 从线程内部退出<br>
+                pthread_cancel 终止同一进程的其他线程
+            </p>
+            <hr>
+            <h3>int pthread_cancel(pthread_t thread):</h3>
+            <p>
+                发送终止信号给thread线程，如果成功则返回0，否则为非0值。<br>
+                <b>pthread_cancel调用并不等待线程终止，它只提出请求。线程在取消请求(pthread_cancel)发出后会继续运行，
+                直到到达某个取消点(CancellationPoint)。</b><br>
+                取消点是线程检查是否能被取消并按照请求进行动作的一个位置.
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

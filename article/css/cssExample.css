@@ -1,0 +1,65 @@
+/*--------------金属光泽------------*/
+@keyframes metalShine {
+    from {
+        left: -100%;
+    }
+
+    to {
+        left: 150%;
+    }
+}
+
+.box {
+    background-color: black;
+    position: relative;
+    overflow: hidden;
+    width: 200px;
+    height: 100px;
+}
+
+.shine {
+    position: absolute;
+    animation: metalShine 2s;
+    animation-iteration-count: infinite;
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, .4) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-45deg);
+}
+
+/*--------------拖尾小球（流星）------------*/
+.meteor{
+    position: relative;
+    width: 200px;
+    height: 200px;
+
+    /* 为了产生前宽后窄的效果，要对两条相邻的边应用不一样的宽度，之后让留下细的那边，其余边隐藏 */
+    border-style: solid;
+    border-color: black transparent transparent transparent; /*只取其中一条边框*/
+    border-width: 3px 6px 0 0; 
+    border-radius: 50%; /*当边框圆角达到50%时会变为圆形*/
+
+    animation: meteorRun 3s linear 0s infinite;
+}
+
+@keyframes meteorRun {  
+    /* 添加动画效果使其旋转 */
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+/*为拖尾效果加一个小球作为头部*/
+.meteor::after{
+    content: "";
+    background-color: black;
+    /*添加阴影让小球看起来好像在发光*/
+    box-shadow: 0 0 8px 10px rgba(12, 12, 12, 0.13);
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    /*为了找准头部的位置，需要调整top和left*/
+    position: absolute;
+    top: 15px;
+    right: 30px;
+}

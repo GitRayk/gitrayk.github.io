@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../img/icon.png">
+    <link rel="stylesheet" href="../../sheet.css" class="sheet" type="text/css">
+    <link rel="stylesheet" href="../../mobile-sheet.css" type="text/css">
+    <script src="../../skin.js"></script>
+    <!-- <script>
+        function AddFlag(){
+            var fileObj = document.getElementsByTagName("input")[0].files[0];
+            //检查是否提交了文件
+            if (fileObj == null){
+                window.alert("请先选择一个图片文件");
+                return 0;
+            }
+            //检查是否提交了图片文件
+            var fileName = document.getElementsByTagName("input")[0].value;
+            fileName = fileName.split("\.");
+            fileName = fileName[fileName.length - 1];
+            if (fileName != "png" && fileName != "jpg"){
+                window.alert("目前仅支持的图片文件为png/jpg");
+                return 0;
+            }
+            //对文件进行处理
+            var fileName = document.getElementsByTagName("input")[0].value;
+            document.getElementById("head-img").style.background = "url(" + fileName + ") no-repeat"; 
+            return 0;
+        }
+    </script> -->
+    <title>CSS蒙版 | 尼伯龙根</title>
+    <style>
+        #mask {
+            height: 200px;
+            width: 200px;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #mask::after {
+            content: "";
+            height: 200px;
+            width: 200px;
+            display: block;
+            background: url(../../img/flag.png) no-repeat;
+            background-size: cover;
+            -webkit-mask: linear-gradient(to right, #000, rgba(0, 0, 0, 0) 70%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="head-title">
+        <a href="../../index.html"><img src="../../img/icon.png" width="30" height="30" alt="icon"
+                style="vertical-align:text-bottom;" /><span style="font-size: 20px;">
+                Niebelungen尼伯龙根</span></a>
+        <span>
+            &nbsp;&nbsp;&nbsp;<a href="../article.html" class="hyperlink"
+                style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+            &nbsp;&nbsp;&nbsp;<a href="../../about/about.html" class="hyperlink" id="about">关于</a>
+        </span>
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../img/sun and moon.png" alt="暗夜模式" id="shift-skin"
+                onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="./css-index.html">CSS</a></li>
+                        <li><a href="../html/html-index.html">HTML</a></li>
+                        <li><a href="../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="../program/python/python-index.html">Python</a></li>
+                        <li><a href="../program/c/c-index.html">C/C++</a></li>
+                        <li><a href="../program/others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>CSS3 - 蒙版</h1>
+        <hr>
+        <div class="article-text">
+            <h4 class="date">2021-10-9</h4>
+            <p>
+                蒙版从字面上看就是在画上蒙上一块板子，被板子蒙上的区域会被保护而其它区域不会<br>
+                css3中新加入了<span class="code">-webkit-mask属性</span><br>
+                （目前好像不是所有的浏览器都支持，仅有以webkit为引擎的部分浏览器可以用？）<br>
+                该属性的语法和background基本类似，
+                使用该属性后，当前html元素便会被看作一块盖在画面上的板子<br>
+            </p>
+            <hr>
+            <h3>图片的渐变蒙版：</h3>
+            <p>
+                代码：<br>
+            <pre>#mask{
+    height: 200px;
+    width: 200px;
+    background: url(../../img/head.jpg) no-repeat;
+    background-size: cover;
+}
+
+#mask::after{
+    content: "";
+    height: 200px;
+    width: 200px;
+    display: block;
+    background: url(../../img/flag.png) no-repeat;
+    background-size: cover;
+    -webkit-mask: linear-gradient(to right, #000, rgba(0, 0, 0, 0) 70%);
+}</pre>
+            原图：<br>
+            <img src="../../img/head.jpg" alt="头像" width="200px" height="200px" id="head-img">
+            <img src="../../img/flag.png" alt="国旗" width="200px" height="200px"><br>
+
+            效果：<br>
+            <div id="mask" style="background-image: url(../../img/head.jpg);"></div><br>
+            在linear-gradient渐变设置中设置的颜色值其实只要看透明度就可以了，
+            当透明度为0时，表示此处没有蒙版，透明度为1时，表示此处有蒙版，其他三原色数值不会有任何影响<br>
+            <br>
+            你可以自己尝试提交一张图片：<input type="file"><button onclick="AddFlag()">提交</button><br>
+            (提交的图片如果不是方形，则可能压缩裁剪。若需要保存请自行截图)
+            <script>
+                function AddFlag() {
+                    var fileObj = document.getElementsByTagName("input")[0].files[0];
+                    //检查是否提交了文件
+                    if (fileObj == null) {
+                        window.alert("请先选择一个图片文件");
+                        return 0;
+                    }
+                    //检查是否提交了图片文件
+                    var fileName = fileObj.name;
+
+                    if (!(/\.(jpe?g|png)$/.test(fileName))) {
+                        window.alert("目前仅支持的图片文件为png/jpg/jpeg");
+                        return 0;
+                    }
+
+                    var reader = new FileReader();
+
+                    reader.readAsDataURL(fileObj);
+                    reader.onload = () => {
+                        document.querySelector("#mask").style.backgroundImage = "url(" + reader.result + ")";
+                        document.querySelector("img[alt='头像']").src = reader.result;
+                    }
+                }
+            </script>
+            </p>
+            <hr>
+            <p>
+                理应还有图片蒙版实现遮罩裁剪，使图片只露出指定部分，
+                但不论使用-webkit-mask: url()还是mask，都没能实现效果，待研究
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

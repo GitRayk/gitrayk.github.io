@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "talent": "绘画",
+        "description": "你初步掌握了绘画的技巧"
+    },
+    {
+        "id": 2,
+        "talent": "计算机",
+        "description": "你半只脚跨入计算机的世界"
+    },
+    {
+        "id": 3,
+        "talent": "废物",
+        "description": "你什么也没学会"
+    }
+]

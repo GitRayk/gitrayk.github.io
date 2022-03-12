@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../../img/icon.png">
+    <link rel="stylesheet" href="../../../sheet.css" type="text/css" class="sheet">
+    <link rel="stylesheet" href="../../../mobile-sheet.css" type="text/css">
+    <script src="../../../skin.js"></script>
+    <title>尼伯龙根</title>
+</head>
+
+<body>
+    <div class="head-title">
+        <a href="../../../index.html"><img src="../../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+		&nbsp;&nbsp;&nbsp;<a href="../../article.html" class="hyperlink" style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+		&nbsp;&nbsp;&nbsp;<a href="../../../about/about.html" class="hyperlink" id="about">关于</a>
+	    </span> 
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+    
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../../css/css-index.html">CSS</a></li>
+                        <li><a href="../../html/html-index.html">HTML</a></li>
+                        <li><a href="../../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="./python-index.html">Python</a></li>
+                        <li><a href="../c/c-index.html">C/C++</a></li>
+                        <li><a href="../others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>将python文件打包成应用程序</h1><hr>
+        <div class="article-text">
+            <h4 class="date">2021-8-17</h4>
+            <p>
+                安装pyinstaller模块: <span class="code">pip install pyinstaller</span><br>
+                在命令行中使用<span class="code">pyinstaller [opt] py文件</span>即可完成打包，打包完成的文件可以在同一系统下使用，即使没有安装python<br>
+                部分参数信息如下：<br>
+                <ul>
+                    <li>-F 仅生成一个可执行文件</li>
+                    <li>-D 是与-F相对的，生成的是一整个完整的文件夹，也是pyinstaller的默认方式</li>
+                    <li>-p 可以指定一个路径来让pyinstaller自己去找程序需要的资源</li>
+                    <li>-i 可以指定一个文件作为生成的可执行文件的图标</li>
+                    <li>-w 生成的文件不会显示命令行窗口（仅当GUI编程时使用，否则会因没有任何界面而报错）</li>
+                    <li>-c 与-w相对，同时也是默认</li>
+                </ul>
+            </p>
+            <hr>
+            <p>
+                在使用pyinstaller命令时会在当前工作目录生成一个dist目录、一个build目录和一个临时的spec文件，
+                最终生成的项目会被保存在dist目录中，其他的则删除不影响可执行文件的使用<br>
+                spec文件会保存一些生成可执行文件时用到的参数信息，所以可以通过修改该文件内容的方式来生成，
+                修改后对该spec文件使用pyinstaller命令即可
+            </p>
+            <hr>
+            <p>
+                使用 exit() 时程序出错<br>
+                解决方法：使用 sys.exit()
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

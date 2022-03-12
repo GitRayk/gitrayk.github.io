@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../../img/icon.png">
+    <link rel="stylesheet" href="../../../sheet.css" type="text/css" class="sheet">
+    <link rel="stylesheet" href="../../../mobile-sheet.css" type="text/css">
+    <script src="../../../skin.js"></script>
+    <title>尼伯龙根</title>
+</head>
+
+<body>
+    <div class="head-title">
+        <a href="../../../index.html"><img src="../../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+		&nbsp;&nbsp;&nbsp;<a href="../../article.html" class="hyperlink" style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+		&nbsp;&nbsp;&nbsp;<a href="../../../about/about.html" class="hyperlink" id="about">关于</a>
+	    </span> 
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+    
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../../css/css-index.html">CSS</a></li>
+                        <li><a href="../../html/html-index.html">HTML</a></li>
+                        <li><a href="../../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="./python-index.html">Python</a></li>
+                        <li><a href="../c/c-index.html">C/C++</a></li>
+                        <li><a href="../others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>python - pynput模块</h1><hr>
+        <div class="article-text">
+            <p>
+                玩游戏的时候要刷一个物品，结果一直在重复一套动作持续数十分钟，实在感觉无聊，便想到能不能用代码来直接实现这一套操作，
+                只要能够让我的游戏接收到模拟程序给出的假输入，我就可以开着电脑睡大觉了，于是搜到这个pynput模块。
+            </p>
+            <hr>
+            <p>
+                pynput模块主要用于模拟鼠标和键盘的输入及对它们的监控<br>
+                先利用pip从网上获取安装包<span class="code">pip install pynput==1.6.8</span>(之所以使用这个版本是因为高版本会在pyinstaller打包时出错）<br>
+                <br>
+                官方的参考文档：<a href="https://pypi.python.org/pypi/pynput" style="text-decoration:none" target="_blank">https://pypi.python.org/pypi/pynput</a>
+                <br>
+                输入设备在本模块中被分为两个大类：
+                <ul>
+                    <li><span class="code">pynput.mouse</span>: 包含控制和监控鼠标或者触摸板的类</li>
+                    <li><span class="code">pynput.keyboard</span>: 包含控制和监控键盘的类</li>
+                </ul>
+                要想控制输入设备，就要先创建它们的控制器实例，使用这两个类的实例化函数<span class="code">Controller()</span>来生成实例，之后只需要调用实例的方法即可<br>
+                <br>
+                除此之外，pynput.mouse还有Button类，它包含鼠标上的按键；pynput.keyboard还有Key类，它包含了键盘上的各种特殊按键。具体的意义参见文档
+            </p>
+            <hr>
+            <h3>鼠标的控制</h3>
+            <p>
+                使用前通常使用<span class="code">from pynput.mouse import Button, Controller</span><br>
+                对于已经创建好的控制器实例，只需调用以下变量或方法：
+                <table>
+                    <tr><th>成员</th><th>意义</th></tr>
+                    <tr><td>position</td><td>表示鼠标指针当前的位置，可以直接为该变量赋值来改变指针位置</td></tr>
+                    <tr><td>move(dx, dy)</td><td>使鼠标相对移动(dx, dy)个距离，以右下为两个轴的正方向</td></tr>
+                    <tr><td>click()</td><td>按下鼠标的指定键，第二个参数可以指定短时间内连续按下的次数，默认为1</td></tr>
+                    <tr><td>press()</td><td>发出按压鼠标指定键的事件(但并不持续，单独使用时和click可能没太大区别)</td></tr>
+                    <tr><td>release()</td><td>发出释放鼠标指定键的事件，一般和press成对使用</td></tr>
+                    <tr><td>scroll(dx, dy)</td><td>使鼠标滚轮向指定方向滚动</td></tr>
+                </table>
+                <br>
+                一开始我以为press()可以做到长时间的按下鼠标键，但要实现拖动时发现并不能这样。如果需要拖动或者长按之类的操作，就需要先使用click()来按下鼠标键，之后用press()对该键持续施压，最后release()释放
+                <br>
+            </p>
+            <hr>
+            <h3>键盘的控制</h3>
+            <p>
+                使用前通常使用<span class="code">from pynput.keyboard import Key, Controller</span><br>
+                与鼠标类似，对键盘实例使用以下变量或方法：
+                <table>
+                    <tr><th>成员</th><th>意义</th></tr>
+                    <tr><td>press()</td><td>按压键盘上的指定键，参数可以是一个长度为1的字符串也可以是Key中成员表示的按键（但不论按压持续了多久，都只算按了一下）</td></tr>
+                    <tr><td>release()</td><td>释放按压在键盘指定键上的力</td></tr>
+                    <tr><td>shift_pressed</td><td>键盘上的任意shift键被按下或大写锁定打开这两个事件任意发生其一时该变量为True（实测发现只能检测press事件）</td></tr>
+                    <tr><td>type()</td><td>该方法会依次按下指定字符串的按键并释放</td></tr>
+                </table>
+            </p>
+            <hr>
+            <p>
+                在实际运行代码时发现在游戏的窗口中对按下按键没有反应，
+                经过一番排查得知有些应用程序会忽略掉按下抬起速度太快的键盘输入，解决方法就是在press和release之间加一个短暂的延迟<br>
+                而且对于使用模拟器的游戏如GBA、NDS模拟器，都对模拟键盘没有反应，而其他游戏则可以使用
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

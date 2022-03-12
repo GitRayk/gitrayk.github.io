@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../img/icon.png">
+    <link rel="stylesheet" href="../../sheet.css" class="sheet" type="text/css">
+    <link rel="stylesheet" href="../../mobile-sheet.css" type="text/css">
+    <link rel="prefetch" href="../../img/backgournd_night.jpeg">
+    <title>DOS批处理教程 | 尼伯龙根</title>
+    <script src="../../skin.js"></script>
+</head>
+
+<body id="top">
+    <!--创建一个能跳转到当前页面顶部的按钮-->
+    <a href="#top" class="hyperlink"><div class="gotoTop">Top</div></a>
+
+    <div class="head-title">
+        <a href="../../index.html"><img src="../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+		&nbsp;&nbsp;&nbsp;<a href="../article.html" class="hyperlink" style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+		&nbsp;&nbsp;&nbsp;<a href="../../about/about.html" class="hyperlink" id="about">关于</a>
+	    </span> 
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+    
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../css/css-index.html">CSS</a></li>
+                        <li><a href="../html/html-index.html">HTML</a></li>
+                        <li><a href="../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="../program/python/python-index.html">Python</a></li>
+                        <li><a href="../program/c/c-index.html">C/C++</a></li>
+                        <li><a href="../program/others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="./unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>DOS及批处理文件知识</h1><hr>
+        <div class="article-text">
+            <h4 class="date">2021-9-24</h4>
+            <p>
+                DOS命令不区分大小写，每一行可以看作一个单独的指令
+            </p>
+            <p>
+                echo是回显命令，echo的状态决定了是否在每一条DOS命令前显示命令行工作目录<br>
+                <b>echo off</b> 或 <b>echo on</b> 可以将其关闭或开启<br>
+                除此之外，在某一行命令前加 <b>@</b> 也不会显示命令行，但是只作用于单行<br>
+            </p>
+            <hr>
+            <p>
+                <b>pause</b> 可以让命令行窗口在批处理文件结束后不立即关闭或执行下一句，
+                而是在键入任意键后再继续
+            </p>
+            <p>
+                <b>call</b> 可以在内部调用其他的程序，不会打开另一个窗口<br>
+                <b>start</b> 会在外部调用程序，亦可以调用其他批处理程序，并且会另外打开一个窗口而不影响本窗口的脚本运行<br>
+                call和start在使用的时候也可以在调用的程序后面增加要传递的参数，之后在打开的程序内部通过%0~%9变量来获取
+            </p>
+            <p>
+                <b>rem</b> 将该行标为注释<br>
+                <b>::</b> 同样也会将改行标为注释，不同的是rem在echo处于开启状态时仍会显示出来而::不会，
+                这就意味着 :: 和 @rem 是等价的
+            </p>
+            <p>
+                <b>goto</b> 可以跳转到其他标签处，DOS的标签以 <b>:标签名</b> 的方式来使用
+            </p>
+            <hr>
+            <p>
+                批处理命令同样支持逻辑运算：<br>
+                如 <b>&</b> 是命令分隔符，所有命令会按顺序执行，不论前者是否成功<br>
+                <b>&&</b> 将在前者成功执行时执行后者<br>
+                <b>||</b> 将在前者失败时执行后者<br>
+                <b>()</b> 使命令分组或嵌套（改变优先级）<br>
+            </p>
+            <hr>
+            <h3>使用变量</h3>
+            <p>
+                批处理命令中也可以使用变量：<br>
+                <b>set 变量名=变量值</b> 但是变量都只会是以字符串的形式保存<br>
+                <b>当等号右边是空白时，表示删除该变量</b><br>
+                要查看变量时，可以使用 <b>set 字符串</b> 此时列出的是所有以该字符串为开头的变量的值<br>
+                也可以用echo来输出某一个变量，使用方法为 <b>echo %变量名%</b><br>
+                当要查看所有变量时，可以单独使用set命令，这同样会列出所有的系统定义的环境变量<br>
+            </p>
+            <p>
+                <b>set /p 变量名=提示信息</b> 使用/p参数来允许用户通过输入来指定变量的值，而等号右边的会变为一段echo的提示信息<br>
+                <b>set /a express</b> 使用/a参数来允许使用数字表达式，express若有等号的话等号的右边会被看作是数字表达式来返回
+            </p>
+            <p>
+                一种情况是，使用set&&echo来表示设置完变量后立即输出，此时并不会得到变量的值，
+                所以最好不要这么用，而是分开写，给系统一点设置变量的时间
+            </p>
+            <p>
+                一些常用的系统变量，它们由系统自动生成，我们只需通过%variable%调用即可<br>
+                当尝试修改这些值时，只会创建一个同名的变量，之后通过echo将会显示系统变量值，使用set将会显示我们自己赋予的值<br>
+                所以为了防止歧义，不要试图修改它们：<br>
+                <ul><a href="#chuandi"></a>
+                    <li><b>%time%</b> 显示当前时间</li>
+                    <li><b>%date%</b> 显示当前日期</li>
+                    <li><b>%cd%</b> 显示当前工作目录，相当于cd指令</li>
+                    <li><b>%errorlevel</b> 显示发生错误的错误值</li>
+                    <li><b>%random%</b> 由cmd.exe生成一个0~32767之间的随机数</li>
+                    <li><b>％0 ~ ％9</b> 表示命令行参数，仅在批处理程序中可以使用，
+                        其中%0表示的是批处理文件本身（可能包括其路径），%1表示的是启动该批处理程序时使用的参数
+                    </li>
+                    <li>等等......</li>
+                </ul>
+            </p>
+            <hr>
+            <p>
+                <b>&lt;、&gt;、&gt;&gt;</b> 都是重定向符号，<br>
+                其中<b>&gt;</b>将会将内容截断输出到指定文件或位置，<br>
+                <b>&gt;&gt;</b>会追加输出,<br>
+                <b>&lt;</b>会从指定位置读取输入，可以将其读到变量当中，如<span class="code">set /p var=&lt;file.txt</span>
+                <pre>
+rem echo的输出将定位到文件file.txt中
+echo hello,world&gt;file.txt
+
+rem buf将为从文件file.txt中取得输入
+set /p buf=&lt;file.txt
+echo %buf%</pre>
+            </p>
+            <hr>
+            <p>
+                <b>|</b> 是一个管道符号，它的作用是将符号左边的命令的输出作为符号右边的命令的输入<br>
+                如：del /p file 是删除文件的命令，/p参数使其需要进行删除确认，即需要键入 y/n<br>
+                echo y|del /p file 则将左边的y输出作为del的输入，表示确定删除文件<br>
+                注意区分 | (管道符号)和 || (逻辑符号)
+            </p>
+            <p>
+                <b>^</b> 是转义符号，如 > 会被当做重定向符号处理，而 ^> 则不会<br>
+                在批处理程序中要显示百分号%时也需要在前面再加一个<b>%</b>表示转义，否则不会显示
+                （但在命令行窗口直接使用dos命令时，百分号%不需要转义）
+            </p>
+            <hr>
+            <h3>语句结构——if</h3>
+            <p>
+                <b>if</b> 可以执行批处理程序中的条件处理，几种常见用法有：<br>
+                <ul>
+                    <li><b>if [not] exist filename cmd</b></li> 判断文件是否存在，并根据结果来决定是否执行后续命令
+                    <li><b>if [not] string1==string2 cmd</b></li> 进行字符串判断
+                    <li><b>if [not] defined variable cmd</b></li> 判断变量是否存在（被定义）
+                </ul>
+                其他完整的用法可以直接在命令行窗口键入help if来获取详细帮助查看
+            </p>
+            <p>
+                if语句后面还可以使用<b>else</b>作为一个完整的命令，需要注意的是，else需要和if在同一行才可以<br>
+            </p>
+            <p>
+                事实上，cmd可以不是一条指令，而是一系列指令组成的指令集，此时需要用括号()将指令集括起来<br>
+                当同时有else时，因为else要和if处在同一行，所以使用时有三个要求：
+                if后的命令集左括号要和if在同一行、右括号要和else在同一行、else后的左括号要和else在同一行<br>
+                这样一来，完整的代码应该是如下格式：
+                <pre>
+if exist filename (
+    cmd...
+) else (
+    cmd...
+)</pre>
+            </p>
+            <p>
+                有时即使将if...else都写在了同一行，仍不能正确识别，看如下例子：
+                <pre>
+set number=1
+if defined number echo hello else echo no number
+pause&exit</pre>
+                此时输出了hello else echo no number而不是hello，就是因为echo将之后的else命令也当作了要输出的内容，
+                所以最好的解决方法就是在使用if...else时严格加上括号
+            </p>
+            <hr>
+            <h3>语句结构——for</h3>
+            <p>
+                循环命令在命令行窗口的基本用法是 <b>for %variable in (set) do cmd</b><br>
+                其中<b>variable应是单个字母而不能是单词</b><br>
+                set是变量会遍历的值的集合（字符串值不需要用引号），之后运行的cmd是单个指令或指令集<br>
+                <b>在批处理程序中，循环变量的设置应是 %%variable 而不是使用单个百分号</b>（需要转义）
+                <pre>
+@echo off
+for %%i in (xxx,yyy) do echo hello %%i
+pause&&exit
+::将会输出hello xxx和hello yyy</pre>
+            </p>
+            <p>
+                当使用 <b>/L</b> 选项时，用法格式变为<b>for /L %%variable in (start,step,end) do cmd</b><br>
+                此时循环变量将会从start值开始依次增加step，直至变量值超出start-end的范围时结束循环
+                （这意味着step可以是负数）
+            </p>
+            <p>
+                其它选项如/F、/D等比较复杂，在需要的时候再使用help for查询吧 
+            </p>
+            <hr>
+            <h3>字符串处理</h3>
+            <p>
+                对于一个储存在变量中的字符串，可以对其处理使其被截取、替换等<br>
+                <b>截取：%variable:~begin,end</b><br>
+                可以截取到下标为[begin,end)范围之间的子串，字符串中的字符下标和其他高级语言一样，是从0开始的，
+                并且下标支持负数（从后往前数的第几个），如-1下标表示的是最后一个字符<br>
+                若省略end，则默认截取到字符串结尾<br>
+                如<span class="code">echo %time:~0,2%</span>可以显示当前时间的小时值<br>
+            </p>
+            <p>
+                <b>替换：%variable:被替换的串=替换串</b><br>
+                该指令可以可以在字符串中寻找要被替换的串，并将其替换后返回<br>
+                要注意的是，该指令并不会改变变量本身的值，如果要该改变则需要将返回值重新赋值给变量<br>
+            </p>
+            <p>
+                <b>合并：就是直接将两个字符串或者字符串变量写在一起</b><br>
+            </p>
+            <p>
+                <b>扩充：扩充是对表示文件路径的字符串进行处理的</b><br>
+                能使用扩充的字符串变量要满足两个条件<br>
+                1)能写成%i的形式，其中i是单个字母或数字<br>
+                2)字符串表示的是文件的路径<br>
+                这就意味着能用扩充的变量应当为%0这种命令行参数变量，或者循环变量<br>
+                部分修饰符：(i代表那个路径变量)<br>
+                <table>
+                    <tr><th>修饰符</th><th>意义</th></tr>
+                    <tr><td>%~i</td><td>删除引号</td></tr>
+                    <tr><td>%~di</td><td>只保留驱动器号，如C:</td></tr>
+                    <tr><td>%~pi</td><td>只保留驱动器下的路径</td></tr>
+                    <tr><td>%~ni</td><td>只保留文件名（不含扩展名）</td></tr>
+                    <tr><td>%~xl</td><td>只保留文件扩展名</td></tr>
+                    <tr><td colspan="2">......</td></tr>
+                </table>
+                以上修饰符也可以组合使用
+            </p>
+            <hr>
+            <p>
+                其他一些常用的基础DOS命令：
+                <table>
+                    <tr><th>命令</th><th>意义</th></tr>
+                    <tr><td>winver</td><td>显示当前计算机的基本信息</td></tr>
+                    <tr><td>chcp [nnn]</td><td>更改活动控制台代码页。如果使用不带参数，chcp 显示活动控制台代码页的数目。其中65001支持utf-8</td></tr>
+                </table>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

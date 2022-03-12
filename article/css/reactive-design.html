@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../img/icon.png">
+    <link rel="stylesheet" href="../../sheet.css" type="text/css" class="sheet">
+    <link rel="stylesheet" href="../../mobile-sheet.css" type="text/css">
+    <script src="../../skin.js"></script>
+    <title>尼伯龙根</title>
+</head>
+
+<body>
+    <div class="head-title">
+        <a href="../../index.html"><img src="../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+		&nbsp;&nbsp;&nbsp;<a href="../article.html" class="hyperlink" style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+		&nbsp;&nbsp;&nbsp;<a href="../../about/about.html" class="hyperlink" id="about">关于</a>
+	    </span> 
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+    
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="./css-index.html">CSS</a></li>
+                        <li><a href="../html/html-index.html">HTML</a></li>
+                        <li><a href="../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="../program/python/python-index.html">Python</a></li>
+                        <li><a href="../program/c/c-index.html">C/C++</a></li>
+                        <li><a href="../program/others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>CSS-响应式设计</h1><hr>
+        <div class="article-text">
+            <p>为了让html页面能够适应不同尺寸的页面，需要用到响应式设计来针对不同的<b>视口</b>进行优化。</p>
+            <p><b>视口viewport</b>是指用户在网页上的可见区域。<br/>
+	    在html5中设置视口时，我们通常在&lt;head&gt;中用<span class="code">&lt;meta name="viewport"&gt;</span>来创建一个视口
+                并设置其属性：<span class="code">width=device-width</span><br>
+                (以及<span class="code">initial-scale=1.0</span>设置初始的缩放比例<br/>
+		<span class="code">user-scalable</span>设置是否允许缩放）
+                这样做可以让整个视口自动适应当前的窗口设备大小
+            </p>
+            <p>
+                但很明显的矛盾是，窗口大小变化时，原本的布局就被打乱了。<br>
+                为了减轻这一因素的影响，可以尽量满足以下规则：
+                <ol style="margin-left: 5%;">
+                    <li>使用比例设定边距而不是像素</li>
+                    <li>使用css媒体查询来对不同的窗口设定不同的样式</li>
+                    <li>优先针对移动设备设计</li>
+                </ol>
+                常用的<span class="code">min-width / max-width</span>等属性也可以在一定程度上解决这些问题<br>
+                (或者两个极好用的<b>属性值</b>：device-width和device-height，它们定义了输出设备的宽和高度)
+            </p>
+            <hr/><br>
+            <p>
+                媒体查询是CSS3中引入的一种技术，其语法为<br>
+                <span class="code">@media 设备名 only （选取条件） not （选取条件） and（设备选取条件） { css }</span><br>
+                它其实也是一种选择器，可以使用一些逻辑语句来根据视口大小精准选择，如
+                <pre>@media only screen and (max-width: 600px)
+{
+    body 
+    {
+        background-color: lightblue;
+    }
+}               </pre>
+                这个例子会在<b>电脑显示器</b>且<b>窗口宽度小于等于600像素</b>时生效，即将body的背景设为淡蓝色<br>
+            </p>
+            <p>
+                几种常用的媒体类型为：
+                <table>
+                    <tr><th>媒体类型</th><th>说明</th></tr>
+                    <tr><td>all</td><td>适用于全部媒体类型</td></tr>
+                    <tr><td>screen</td><td>适用于电脑显示器</td></tr>
+                    <tr><td>print</td><td>适用于打印机</td></tr>
+                    <tr><td>handheld</td><td>适用于小的手持设备（貌似不是指手机）</td></tr>
+                </table>
+                <br>
+                实际上不管是PC、平板电脑还是手机，媒体类型好像都是screen，所以应该通过尺寸来辨别究竟是什么：
+                <pre>
+/* 超小型设备（电话，600px 及以下） */
+@media only screen and (max-width: 600px) {...} 
+
+/* 小型设备（纵向平板电脑和大型手机，600 像素及以上） */
+@media only screen and (min-width: 600px) {...} 
+
+/* 中型设备（横向平板电脑，768 像素及以上） */
+@media only screen and (min-width: 768px) {...} 
+
+/* 大型设备（笔记本电脑/台式机，992px 及以上） */
+@media only screen and (min-width: 992px) {...}                   
+
+/* 超大型设备（大型笔记本电脑和台式机，1200px 及以上） */
+@media only screen and (min-width: 1200px) {...}
+                </pre>
+            </p>
+            <hr><br>
+            <p>
+                对于手持设备，还有很重要的一点就是可以旋转屏幕，分为横屏模式和竖屏模式<br>
+                在css中我们通过<span class="code">orientation: portrait</span>来表示竖屏，即屏幕高度大于等于宽度<br>
+                <span class="code">orientation: landscape</span>来表示横屏，即屏幕宽度大于等于高度<br>
+                这两个属性可以在@media中作为表达式使用
+            </p>
+            <hr><br>
+            <p>
+                除此之外，我们还可以结合媒体查询来设置“断点”<br>
+                即是指将页面按宽度分为不同的类，对于不同的标签元素使用不同的类。并且在PC端和移动端，这些类的width可以是不一样的
+            </p>
+            <p>
+                除此之外，html的link标签也具有media属性，会根据该属性决定该link是否生效
+            </p>
+            <hr><br>
+            <p>
+                除了自己动手写之外，还可以利用现成的框架如Bootstrap来完成<br>
+                （对于新手来说，自己写肯定只会有好处）
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

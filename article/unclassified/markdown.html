@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../img/icon.png">
+    <link rel="stylesheet" href="../../sheet.css" type="text/css" class="sheet">
+    <link rel="stylesheet" href="../../mobile-sheet.css" type="text/css">
+    <script src="../../skin.js"></script>
+    <title>一分钟学会Markdown | 尼伯龙根</title>
+</head>
+
+<body id="top">
+    <!--创建一个能跳转到当前页面顶部的按钮-->
+    <a href="#top" class="hyperlink"><div class="gotoTop">Top</div></a>
+
+    <div class="head-title">
+        <a href="../../index.html"><img src="../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+		&nbsp;&nbsp;&nbsp;<a href="../article.html" class="hyperlink" style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+		&nbsp;&nbsp;&nbsp;<a href="../../about/about.html" class="hyperlink" id="about">关于</a>
+	    </span> 
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+    
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../css/css-index.html">CSS</a></li>
+                        <li><a href="../html/html-index.html">HTML</a></li>
+                        <li><a href="../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="../program/python/python-index.html">Python</a></li>
+                        <li><a href="../program/c/c-index.html">C/C++</a></li>
+                        <li><a href="../program/others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="./unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>一分钟学会Markdown</h1><hr>
+        <div class="article-text">
+            <h4 class="date">2021-10-3</h4>
+            <p>
+                Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。<br>
+                使用它编写的文档可以导出为 HTML 、Word、图像、PDF、Epub 等多种格式的文档。
+                而且Markdown文件本身也在一定程度上支持HTML的语法<br>
+                其文档后缀为 .md, .markdown。学习和使用起来非常简单易懂。<br>
+                算了，还是看菜鸟教程吧：<span class="article-link"><a href="https://www.runoob.com/markdown/md-tutorial.html">菜鸟教程 - Markdown</a></span>
+            </p>
+            <hr>
+            <h4>标题</h4>
+            <p>    
+                最常见的markdown标题使用的是 #<br>
+                <pre>
+# 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题</pre>
+                需要注意的是<b>符号 # 后面应该跟一个空格</b><br>
+                其中四级标题和正文中的字号是一样大的
+            </p>
+            <p>
+                另一种写法是：
+                <pre>
+我展示的是一级标题
+=================
+
+我展示的是二级标题
+-----------------</pre>
+            </p>
+            <hr>
+            <h4>段落</h4>
+            <p>                
+                Markdown中段落内正文没有特殊的格式，直接编写文字就可以了。<br>
+                要换行时，使用<b>两个空格加一个回车</b>或者<b>两次换行</b><br>
+                正文中的特殊字体：
+                <pre>
+*斜体文本*
+_斜体文本_
+**粗体文本**
+__粗体文本__
+***粗斜体文本***
+___粗斜体文本___</pre>
+            </p>
+            <hr>
+            <h4>列表：</h4>
+            <p>    
+                无序列表使用<b> * 、+、- 加一个空格</b>来作开头<br>
+                有序列表使用<b>数字加小数点</b>作为开头<br>
+                列表中可以嵌套任意内容
+            </p>
+            <hr>
+            <h4>引用和代码：</h4>
+            <p>    
+                引用的部分内容使用<b> > 加一个空格</b>来作开头 <br>
+                单个短的代码片段使用<b>一组反引号 ` ` 将其包围</b><br>
+                代码块使用<b>1个制表符或4个空格</b>作开头<br>
+                代码块还可以使用<b>3个连续的反引号``` code ```将其包围</b>，
+                但此时第一行内容相当于对该段代码使用的语言的描述，并不会显示出来
+            </p>
+            <hr>
+            <h4>链接和图片：</h4>
+            <p>   
+                链接的写法：<b>[链接名称](链接地址)</b> 或者 <b>&lt;链接地址&gt;</b><br>
+                图片的写法：<b>![alt 属性文本](图片地址)</b>
+            </p>
+            <hr>
+            <h4>表格：</h4>
+            <p>
+                Markdown<b>使用 | 来分割单元格和作边框，使用若干个 - 来分割表头和其他数据</b><br>
+                |  表头   | 表头  |<br>
+                |  ----  | ----  |<br>
+                | 单元格  | 单元格 |<br>
+                | 单元格  | 单元格 |<br>
+                其中表头分割符的不同写法，会影响数据的排版：<br>
+                <b> :-- </b> 数据会左对齐<br>
+                <b> --: </b> 数据会右对齐<br>
+                <b> :-: </b> 数据会居中对齐<br>
+            </p>
+            <hr>
+            <h4>其他技巧：</h4>
+            <p>
+                使用LateX改变字体颜色，语法为：<b> $\color{颜色}{要变色的文字}$ </b><br>
+                颜色可以使用文字描述，也可使用 #FFFFFF 这种6位十六进制表示
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../img/icon.png">
+    <link rel="stylesheet" href="../../sheet.css" type="text/css" class="sheet">
+    <link rel="stylesheet" href="../../mobile-sheet.css" type="text/css">
+    <script src="../../skin.js"></script>
+    <title>XML 简单介绍 | 尼伯龙根</title>
+</head>
+
+<body id="top">
+    <!--创建一个能跳转到当前页面顶部的按钮-->
+    <a href="#top" class="hyperlink"><div class="gotoTop">Top</div></a>
+
+    <div class="head-title">
+        <a href="../../index.html"><img src="../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+		&nbsp;&nbsp;&nbsp;<a href="../article.html" class="hyperlink" style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+		&nbsp;&nbsp;&nbsp;<a href="../../about/about.html" class="hyperlink" id="about">关于</a>
+	    </span> 
+        <a href="javascript:void(0);"><img src="../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+    
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../css/css-index.html">CSS</a></li>
+                        <li><a href="./html-index.html">HTML</a></li>
+                        <li><a href="../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="../program/python/python-index.html">Python</a></li>
+                        <li><a href="../program/c/c-index.html">C/C++</a></li>
+                        <li><a href="../program/others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>XML基础</h1><hr>
+        <div class="article-text">
+            <h4 class="date">2021-10-10</h4>
+            <h3>XML基本情况</h3>
+            <p>
+                XML只是一种仅用作数据存储和传输的标记语言，它不会做任何事，只是写作文本的形式而已。
+                使用XML，我们就可以使用短短几行 JS 语句来改变网页中的某些数据<br>
+                XML作为HTML的扩充而不是它的替代，是独立于HTML存在的，文件后缀以 <b>.xml</b> 来标识<br>
+                XML<b>区分大小写</b>，它的基本写法也与HTML非常的相似，也是使用一系列标签，并且也使用树形结构，有一个根标签和若干子标签。
+                不同的是，XML中是没有预先定义的标签的，这就意味着所有的标签可以被我们任意定义，
+                而标签中的内容通常就是我们想要保存的数据。<br>
+                而且HTML中的多个空格会被删减，而XML中数据有多少个空格就是多少个。
+            </p>
+            <p>
+                XML语法的正确性可以通过DTD来验证。<br>
+                还有一点需要注意，XML文档和加载它的HTML页面必须位于同一服务器中，不允许跨域访问，
+                这也意味着我们没法仅通过file协议访问本地文件来查看XML的效果了。
+            </p>
+            <hr>
+            <h3>XML的浏览</h3>
+            <p>
+                在浏览器中打开XML文件只会，显示其树形结构，
+                但我们仍可以使用CSS为其设定样式：<br>
+                在文件中使用<span class="code">&lt;?xml-stylesheet type="text/css" href="xxx.css"?&gt;</span>语法来连接一个css文件<br>
+                当然，更好的方法是使用XSLT：<span class="code">&lt;?xml-stylesheet type="text/xsl" href="xxx.xsl"?&gt;</span><br>
+                XSLT 会将 XML 文档转换成 HTMl 文档
+            </p>
+            <hr>
+            <h3>XML语法</h3>
+            <p>
+                XML文本开头使用<span class="code">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br>
+                其中<span class="code">version属性</span>描述了使用的XML的版本号，
+                <span class="code">encoding属性</span>说明了编码方式<br>
+                一个简单的XML文件实例是:
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;bookstore&gt;
+&lt;book id="1"&gt;
+    &lt;title&gt;贩罪&lt;/title&gt;&lt;author&gt;猫腻&lt;/author&gt;&lt;price&gt;21&lt;/price&gt;
+&lt;/book&gt;
+&lt;book id="2"&gt;
+    &lt;title&gt;网游之近战法师&lt;/title&gt;&lt;author&gt;蝴蝶蓝&lt;/author&gt;&lt;price&gt;25&lt;/price&gt;
+&lt;/book&gt;
+&lt;book id="3"&gt;
+    &lt;title&gt;斗罗大陆&lt;/title&gt;&lt;author&gt;唐家三少&lt;/author&gt;&lt;price&gt;22&lt;/price&gt;
+&lt;/book&gt;
+&lt;/bookstore&gt;
+</pre>
+                很容易发现，这些标签名&lt;bookstore&gt;、&lt;book&gt;、&lt;author&gt;等等都是我随便写的，想怎么命名就怎么命名
+                book标签的id属性也是我随手捏造的，这里的id是我为了区分不同的book
+            </p>
+            <hr>
+            <h3>XML解析</h3>
+            <p>
+                为了获取一个 XML 文档，我们需要使用解析器，所有现代浏览器都内建了供读取和操作 XML 的 XML 解析器。
+                解析器把 XML 转换为 XML DOM 对象 - 可通过 JavaScript 操作的对象。<br>
+                (XML DOM那又是另外的教程了，不过基本情况和HTML DOM差不多，都是文档对象模型)<br>
+<pre>
+if (window.XMLHttpRequest){
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+}
+else{
+    // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+xmlhttp.open("GET","bookstore.xml",false);
+xmlhttp.send();
+xmlDoc=xmlhttp.responseXML; 
+</pre>
+                这段代码所作的事就是：根据浏览器来创建一个 XMLHttpRequest 对象（老版的浏览器使用的是 ActiveX 对象），
+                之后通过这个对象从服务器中取回XML信息<br>
+                其中open()方法的第三个参数表示是否进行异步处理，为 true 时，浏览器不会等待服务器返回结果而继续执行后续代码，
+                为 false 时则会阻塞等待。<br>
+                <a href="https://www.w3school.com.cn/xml/xml_parser.asp" title="w3school - XML教程" style="text-decoration: none;">查看其他用解析器加载XML的方法</a><br>
+            </p>
+            <p>
+                或者我们现在有一段XML字符串而非外部文件，我们可以用下面的方法加载:
+<pre>
+txt="<bookstore><book>";
+txt=txt+"<title>Everyday Italian</title>";
+txt=txt+"<author>Giada De Laurentiis</author>";
+txt=txt+"<year>2005</year>";
+txt=txt+"</book></bookstore>";
+
+if (window.DOMParser){
+    parser=new DOMParser();
+    xmlDoc=parser.parseFromString(txt,"text/xml");
+}
+else{
+    // Internet Explorer
+    xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+    xmlDoc.async="false";
+    xmlDoc.loadXML(txt);
+}
+</pre>
+                需要多注意的就是IE和其他浏览器的区别。<br>
+                做完以上操作，我们得到的 xmlDoc 变量就可以以DOM的形式获取其信息了。
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

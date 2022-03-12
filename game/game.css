@@ -1,0 +1,108 @@
+*{
+    font-size: large;
+    box-sizing: border-box;
+
+    --viewportColor: rgb(241, 241, 241);
+}
+
+body{
+    height: 100%;
+    margin: 0;
+    max-width: device-width;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #527590;
+    /* background-image: url(./background.jpg);
+    background-size: cover; */
+}
+
+button{
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.712);
+}
+
+/***********位于画面正上方的提示信息框**************/
+#tips{
+    position: fixed;
+    top: -25%;
+    left: 0;
+    z-index: 2;
+
+    width: 100%;
+    height: 20%;
+
+    background-color: rgb(255, 255, 255);
+
+    box-shadow: 0px 5px 5px #888888;
+    transition-property: top;
+    transition-duration: 1s;
+
+    padding: 10px;
+    text-align: center;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*******主界面相关的设计*******/
+
+#start_button{
+    font-size: large;
+    position: absolute;
+    top: 80%;
+    margin: auto;
+}
+
+#home>p{
+    position: relative;
+    top: 100px;
+}
+
+#home{
+    /* In order to get smooth transition, I will set the opacity property from 1 to 0 during 0.5s */
+    transition-property: opacity;
+    transition-duration: 1s;
+}
+
+/********游戏主体界面*********/
+#Adventure_main{
+    background-color: var(--viewportColor);
+    box-shadow: 5px 5px 5px #b4b3b3;
+    border-radius: 4px;
+
+    position: absolute;
+    top: 5%;
+    width: 90%;
+    height: 90%;
+
+    opacity: 0;
+    visibility: hidden;
+    transition-property: opacity;
+    transition-duration: 1s;
+
+    text-align: center;
+}
+
+#interact{
+    text-align: center;
+    width: 100%;
+    height: 10%;
+    position: absolute;
+    bottom: 10px;
+    background-color: rgb(108, 158, 202);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#info{
+    height: 80%;
+    overflow: scroll;
+    padding: 0 10px;
+}
+#info p{
+    margin: 10px;
+}

@@ -1,0 +1,260 @@
+@media screen and (orientation: portrait)
+{
+    div{
+        word-break:break-all;   /*实现单词内换行*/
+    }
+
+    body {
+        background-image: url(./img/background_img_mobile.jpg);
+        background-repeat: no-repeat;
+        background-attachment:fixed;
+        background-position: top left;
+        background-size: device-width device-height;
+    }
+    /*------头部的网站整体导航---------*/
+    .hyperlink {
+        color: black;
+        text-decoration: none;
+        position: relative;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    .hyperlink:hover {
+        color: rgb(172, 165, 165);
+        text-decoration: black;
+    }
+    .head-title {
+        border: none;
+        background-color: rgba(255, 255, 255, 1);
+        height: auto;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 10px;
+        z-index: 10;
+    }
+
+    .head-title a{
+        text-decoration: none;
+        color: black;
+    }
+
+    .head-title #shift-skin{
+        display: none;
+    }
+    /*home界面*/
+    .home {
+        background-color: rgba(255, 255, 255, 0.9);;
+        margin-top: 90px;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: device-width;
+        padding: 20px;
+    }
+    
+    .home .text {
+        margin: auto;
+        width: 70%;
+    }
+    /*-------article页面---------*/
+    /*-------贴文页面的分类导航---------*/
+    .nav-article {
+        margin: 80px 0;
+        background-color: rgba(255, 255, 255, 0.9);;
+        min-width: device-width;
+    }
+
+    .nav-article>p {
+        padding: 20px 0 0 20px;
+        font-weight: bold;
+        height: auto;
+    }
+
+    .nav-article ul {
+        display: block;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        height: auto;
+        width: auto;
+    }
+    /*--------下拉栏总体设计--------*/
+    .nav-article .dropdown {
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        padding: 20px;
+        position: relative;
+    }
+
+    .nav-article a {
+        text-align: center;
+        display: block;
+        text-decoration: none;
+        color: black;
+        padding: 20px;
+    }
+
+    .nav-article a:hover {
+        color: #fff;
+        background-color: rgb(18, 14, 66);
+    }
+    /*--------web开发的下拉栏----------*/
+    .nav-article .web:hover .dropdown-content-web {
+        display: block;
+    }
+
+    .nav-article .dropdown-content-web {
+        display: none;
+        width: 200px;
+        position: absolute;
+        background-color: white;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        /*出现的位置*/
+        left: 30%;
+        top: 100%;
+        z-index: 2;
+    }
+    /*--------日常的下拉栏------------*/
+    .nav-article .daily:hover .dropdown-content-daily {
+        display: block;
+    }
+    .nav-article .dropdown-content-daily {
+        display: none;
+        width: 200px;
+        position: absolute;
+        background-color: white;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        /*出现的位置*/
+        left: 30%;
+        top: 100%;
+        z-index: 2;
+    }
+    /**************下拉栏****************/
+    .nav-article .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    .nav-article .dropdown-content {
+        display: none;
+        width: 200px;
+        position: absolute;
+        background-color: white;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        /*出现的位置*/
+        left: 30%;
+        top: 100%;
+        z-index: 2;
+    }
+    /*------------贴文页面的内容总览--------*/
+    .article {
+        background-color: rgba(255, 255, 255, 0.9);;
+        margin: 10px 0;
+        width: device-width;
+        padding: 20px;
+        line-height: 200%;
+    }
+
+    .article-text{
+        margin: 4% 0 4% 4%;
+    }
+
+    .article-text ol{
+        margin-left: 5%;
+    }
+
+    pre, .code{
+        font-style: italic;
+        font-size: small;
+        color: rgb(61, 61, 155);
+        margin: 0 8px;
+        padding: 0 4px;
+        border: 1px solid grey;
+        border-radius: 4px;
+        background-color: rgb(236, 236, 236);
+    }
+
+    pre{
+        padding: 8px;
+        margin: 8px;
+        line-height: 120%;
+        font-size: 100%;
+        font-weight:600;
+        overflow: auto;
+        width:90%
+    }
+    
+    .date{
+        text-align: right;
+        color: rgb(156, 156, 156);
+        font-size: small;
+        margin: -10px 0;
+        padding: -10px 0;
+    }
+/*------表格页面-------*/
+    table{
+        width: 90%;
+        max-width: 100%;
+        background-color: lightgray;
+        border-collapse: collapse;
+    }
+
+    th, td{
+        text-align: center;
+        border: 1px solid grey;
+        border-radius: 5px;
+    }
+
+    tr td{
+        background-color: white;
+    }
+
+    /*------article文章的链接*/
+
+    .article-link a{
+        text-decoration: none;
+        color: black;
+    }
+    
+    .article-link p{
+        font-size: small;
+        text-indent: 5%;
+    }
+    
+    .article-link a:hover{
+        color:rgb(6, 6, 167);
+    }
+
+    /*-----上下篇点击动画--------*/
+    .hiden{
+        color:rgba(0, 0, 0, 0);
+        position: relative;
+        left: -5px;
+    }
+
+    .previous:hover .hiden, .next:hover .hiden{
+        color:black;
+        left: 0;
+        transition-duration: 1s;
+    }
+
+    /*------设置一个可以跳转到当前网页顶部的按钮------*/
+    /*目前仅在bat.html中使用了*/
+    .gotoTop, .gotoTop:hover{
+    color: black;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    text-align: center;
+    padding-top: 15px;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
+    width: 50px;
+    height: 35px;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 10;
+}
+}
+

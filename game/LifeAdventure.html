@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width; height=device-height; initial-scale=1.0"> -->
+        <meta charset="utf-8" name="viewport" content="width=device-width">
+        <title>人生大冒险！</title>
+        <script src="./game.js"></script>
+        <link rel="stylesheet" href="./game.css">
+        <link rel="icon" href="./game.png">
+    </head>
+    <body>
+        <div id="tips">
+            <p></p>
+        </div>
+
+        <div id="home">
+            <p>人生大冒险！简陋试玩版</p>
+            <button id="start_button" onclick="startGame()">点击开始你的冒险</button>
+        </div>
+
+        <div id="Adventure_main">
+            <div id="info">
+                <div id="locateBottom"></div>
+            </div>
+            <div id="interact" onclick="nextStep()">
+                <p>下一步</p>
+            </div>
+        </div>
+    </body>
+</html>

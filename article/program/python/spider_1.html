@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../../img/icon.png">
+    <link rel="stylesheet" href="../../../sheet.css" type="text/css" class="sheet">
+    <link rel="stylesheet" href="../../../mobile-sheet.css" type="text/css">
+    <script src="../../../skin.js"></script>
+    <title>尼伯龙根</title>
+</head>
+
+<body>
+    <div class="head-title">
+        <a href="../../../index.html"><img src="../../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+		&nbsp;&nbsp;&nbsp;<a href="../../article.html" class="hyperlink" style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+		&nbsp;&nbsp;&nbsp;<a href="../../../about/about.html" class="hyperlink" id="about">关于</a>
+	    </span> 
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+    
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../../css/css-index.html">CSS</a></li>
+                        <li><a href="../../html/html-index.html">HTML</a></li>
+                        <li><a href="../../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="./python-index.html">Python</a></li>
+                        <li><a href="../c/c-index.html">C/C++</a></li>
+                        <li><a href="../others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>python爬虫入门(一)</h1><hr>
+        <div class="article-text">
+            <h4 class="date">2021-8-19</h4>
+            <p>
+                当我们访问一个网页的时候，就是先向该网站发送访问请求，之后获得响应，并由浏览器解析响应内容，最终呈现在用户面前<br>
+                那么对于爬虫来说也是一样的道理，我们需要用代码来模拟发送请求的过程并获取响应（可由requests模块完成），
+                之后解析响应的内容并寻找自己所需要的资源（可由bs4模块完成）<br>
+            </p>
+            <hr>
+            <p>
+                首先我们安装requests模块：<span class="code">pip install requests</span><br>
+                其官方中文文档为：<a target="_blank" style="text-decoration: none;" href="https://docs.python-requests.org/zh_CN/latest/user/quickstart.html">requests快速上手</a><br>
+                向网站发送请求的方式分为两种，<strong>get</strong>和<strong>post</strong>,
+                <b>前者比较常见，响应速度快；而后者则可以以表单形式上传参数，可以进行更复杂的处理</b><br>
+                要使用这两种方法，最简单就是<span class="code"> requests.get(url) </span>或<span class="code"> requests.post(url)</span><br>
+                它们会<b>返回一个Response对象，直接打印该对象会显示一段包含响应码的文本，200表示为成功取得响应，4XX表示客户端错误，5XX表示服务器错误响应</b><br>
+                Response有几种常用的方法或属性：
+                <table>
+                    <tr><th>方法或属性</th><th>意义</th></tr>
+                    <tr><td>encoding</td><td>表示响应的编码方式，可以直接修改其值</td></tr>
+                    <tr><td>text</td><td>表示响应的文本内容，如html网站的源码</td></tr>
+                    <tr><td>content</td><td>表示响应的二进制内容，对于二进制文件如图标来说应以这种成员取得数据</td></tr>
+                    <tr><td>status_code</td><td>表示响应码</td></tr>
+                </table>
+            </p>
+            <hr>
+            <p>
+                事实上我们通常会在请求响应时使用更多的参数
+                <ul>
+                    <li><b>headers</b> 以dict的类型传入，用于设置访问的请求头</li>
+                    <li><b>data</b> 以dict的类型传入，可以用于post访问时提交表单数据，在控制台的XHR中即请求荷载字段</li>
+                    <li><b>timeout</b> 设置停止等待响应的时间，若不设置则可能会长时间的处于等待响应状态</li>
+                    <li><b>cookies</b> 请求时发送cookies到服务器，cookie也可以写在headers中</li>
+                </ul>
+            </p>
+            <hr>
+            <p class="next"><span class="hiden">》</span>下一篇：<a href="spider_2.html">python爬虫入门(二)</a></p>
+        </div>
+    </div>
+</body>
+
+</html>

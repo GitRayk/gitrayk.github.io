@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../img/icon.png">
+    <link rel="stylesheet" href="../../sheet.css" class="sheet" type="text/css">
+    <link rel="stylesheet" href="../../mobile-sheet.css" type="text/css">
+    <link rel="prefetch" href="../../img/backgournd_night.jpeg">
+    <title>crontab | 尼伯龙根</title>
+    <script src="../../skin.js"></script>
+</head>
+
+<body id="top">
+    <!--创建一个能跳转到当前页面顶部的按钮-->
+    <a href="#top" class="hyperlink"><div class="gotoTop">Top</div></a>
+
+    <div class="head-title">
+        <a href="../../index.html"><img src="../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+		&nbsp;&nbsp;&nbsp;<a href="../article.html" class="hyperlink" style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+		&nbsp;&nbsp;&nbsp;<a href="../../about/about.html" class="hyperlink" id="about">关于</a>
+	    </span> 
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+    
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../css/css-index.html">CSS</a></li>
+                        <li><a href="../html/html-index.html">HTML</a></li>
+                        <li><a href="../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="../program/python/python-index.html">Python</a></li>
+                        <li><a href="../program/c/c-index.html">C/C++</a></li>
+                        <li><a href="../program/others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="./unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>Linux 定时任务 - crontab 命令</h1><hr>
+        <h4 class="date">2021-10-14</h4>
+        <div class="article-text">
+            <p>
+                crontab (crond table)周期计划表<br>
+                使用形式：<span class="code"> crontab [-u user] file </span>从指定文件中读取任务，
+                或 <span class="code"> crontab [-u user] -e | -l | -r </span><br>
+                <table>
+                    <tr><th>参数</th><th>意义</th></tr>
+                    <tr><td>-u</td><td>对指定用户的任务表操作（得有权限）</td></tr>
+                    <tr><td>-e</td><td>启动文本编辑器（vi/vim）编辑任务</td></tr>
+                    <tr><td>-l</td><td>显示任务列表</td></tr>
+                    <tr><td>-r</td><td>删除所有任务</td></tr>
+                </table><br>
+                <b>注：新创建的任务会在约两分钟后才会执行</b>
+            </p>
+            <hr>
+            <p>
+                一条定时任务的格式是<span class="code"> min hour day month week command </span><br>
+                意义为：在第month个月的第day天（或week星期几）的hour: min时间（24小时制）执行命令command<br>
+                对于各时间选取参数：<br>
+                <b> * </b>表示任意<br>
+                <b> a-b </b>表示范围<br>
+                <b> */n </b>表示每隔n个时间单位<br>
+                <b> a, b </b>表示a和b时间都要执行<br>
+                如<span class="code">0 12 * * * python3 /home/user/file.py</span>表示每天的12：00会使用python3执行指定文件
+            </p>
+            <hr>
+            <p>
+                root用户的周期任务及相关配置保存在 /etc 目录下的crontab以及相似文件中<br>
+                所有用户的周期任务表会保存在 /var/spool/cron/crontabs 目录中，
+                使用 crontab 命令实际就是对该目录下文件的修改
+            </p>
+        </div>
+
+    </div>
+</body>
+
+</html>

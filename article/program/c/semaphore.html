@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../../img/icon.png">
+    <link rel="stylesheet" href="../../../sheet.css" type="text/css" class="sheet">
+    <link rel="stylesheet" href="../../../mobile-sheet.css" type="text/css">
+    <script src="../../../skin.js"></script>
+    <title>信号量编程 | 尼伯龙根</title>
+</head>
+
+<body id="top">
+    <!--创建一个能跳转到当前页面顶部的按钮-->
+    <a href="#top" class="hyperlink"><div class="gotoTop">Top</div></a>
+
+    <div class="head-title">
+        <a href="../../../index.html"><img src="../../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+		&nbsp;&nbsp;&nbsp;<a href="../../article.html" class="hyperlink" style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+		&nbsp;&nbsp;&nbsp;<a href="../../../about/about.html" class="hyperlink" id="about">关于</a>
+	    </span> 
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+    
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../../css/css-index.html">CSS</a></li>
+                        <li><a href="../../html/html-index.html">HTML</a></li>
+                        <li><a href="../../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="../python/python-index.html">Python</a></li>
+                        <li><a href="./c-index.html">C/C++</a></li>
+                        <li><a href="../others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>C语言 使用信号量机制编程</h1><hr>
+        <div class="article-text">
+            <h4 class="date">2021-11-25</h4>
+            <h3>使用 sem_t 类型创建信号量变量</h3>
+            <p>
+                <b> sem_t </b>本质上是一个长整型，包含在头文件<span class="code"> semaphore.h </span>中<br>
+                为了信号量能被进程下的所有线程看见，通常将信号量声明在全局等可以共享的内存区域
+            </p>
+            <hr>
+            <h3>int sem_init(sem_t *sem, int pshared, unsigned int value)</h3>
+            <p>
+                信号量初始化函数，<b>其中 sem 是待初始化信号量地址，value 是初始化的值</b><br>
+                pshared 决定了是否在进程间共享，若值为0，则只在当前进程的子线程之间共享，若不为0则进程间也可以共享<br>
+                sem_init() 成功时返回 0；错误时，返回 -1，并把 errno 设置为合适的值。
+            </p>
+            <hr>
+            <h3>int sem_wait(sem_t * sem)</h3>
+            <p>
+                该函数先检查 sem 指向的信号量是否大于0，当在大于0的时候，会令其值减1<br>
+                若 sem 的值不大于0，则该函数会造成休眠并等待直到值大于0<br>
+                所有的函数成功返回 0 ，错误的话信号量的值不改动，返回 -1 ，errno 设定来标识错误<br>
+            </p>
+            <p>
+                <b><span class="code">函数 sem_trywait(sem_t *sem) </span>是函数 sem_wait() 的非阻塞版本</b><br>
+                它不会造成代码阻塞，而是在直接不能减1时直接返回错误
+            </p>
+            <hr>
+            <h3>int sem_post(sem_t *sem)</h3>
+            <p>
+                该函数为信号量加上1，即 signal/V 操作<br>
+                sem_post() 成功时返回 0；错误时，信号量的值没有更改，-1 被返回，并设置 errno 来指明错误<br>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

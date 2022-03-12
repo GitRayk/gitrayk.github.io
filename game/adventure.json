@@ -1,0 +1,151 @@
+[
+    {
+        "id": 1,
+        "description": "你听到来自海边的遥远呼唤",
+        "condition": "function(){return(player.cthulhu==undefined)}",
+        "left": "追随",
+        "right": "无视",
+        "result": [
+            "player.cthulhu=progress;getTips('牌组[克苏鲁]已解锁');",
+            "player.asset-=1;getTips('你感到失去了什么东西');"
+        ]
+    },
+    {
+        "id": 2,
+        "description": "你听到神秘的低语，但你却无法理解这语言",
+        "left": "？",
+        "right": "？",
+        "condition": "function(){return(player.cthulhu!=undefined)}",
+        "result": [
+            "player.san-=1;",
+            "player.san-=1;"
+        ]
+    },
+    {
+        "id": 3,
+        "description": "你路过一家彩票店，想进去花2资产赌一赌手气吗？",
+        "left": "进入",
+        "right": "离开",
+        "condition": "function(){return(greater(player.asset,1));}",
+        "result": [
+            "if(less(Math.random(),0.02)){getTips('你中奖了，也许这就是天选之子');player.asset+=50;}",
+            "player.asset-=2;"
+        ]
+    },
+    {
+        "id": 4,
+        "description": "一位乞丐拉住你了，祈求你为他买一点吃的(花费1资产)",
+        "left": "同意",
+        "right": "离开",
+        "condition": "function(){return(greater(player.asset,0));}",
+        "result": [
+            "player.asset-=1;player.kindness+=1;",
+            ""
+        ]
+    },
+    {
+        "id": 5,
+        "description": "你看到网上的美妆博主推荐的化妆品，正在考虑要不要也买一套(花费2资产)",
+        "left": "买",
+        "right": "不买",
+        "condition": "function(){return(greater(player.asset,1));}",
+        "result": [
+            "player.asset-=2;player.appearence+=1;",
+            ""
+        ]
+    },
+    {
+        "id": 6,
+        "description": "你被一位异性好友表白，你看了看自己的样子，思考是否应该接受他",
+        "left": "接受",
+        "right": "拒绝",
+        "result": [
+            "if(greater(player.appearence,2)){player.love=1;getTips('牌组[爱情]已解锁')}else{player.san-=1;getTips('然而这只是一个恶作剧，你成为了众人的笑柄')};",
+            ""
+        ]
+    },
+    {
+        "id": 7,
+        "description": "一位神秘老人拉住了你，趁你不注意把一块很脏的玉佩戴到了你的脖子上",
+        "left": "买下它(20资产)",
+        "right": "脱下并离开",
+        "condition": "function(){return(player.amulet==undefined);}",
+        "result": [
+            "if(greater(player.asset,19)){player.asset-=20;player.amulet=1;}else{getTips('看你掏不出钱，老人赶紧将玉佩抢了回来')};",
+            ""
+        ]
+    },
+    {
+        "id": 8,
+        "description": "一位老太倒在了地上",
+        "left": "扶起她",
+        "right": "无视",
+        "result": [
+            "player.kindness+=1;if(greater(Math.random(),0.3)){player.asset-=2;getTips('你被讹了，正义真的存在吗');}",
+            "player.kindness-=1;"
+        ]
+    },
+    {
+        "id": 9,
+        "description": "你在海边捡到一个海螺，你从里面能听到海洋的声音",
+        "condition": "function(){return(player.cthulhu!=undefined&&player.conch==undefined);}",
+        "left": "收起来",
+        "right": "卖掉",
+        "result": [
+            "player.san-=1;player.conch=1;",
+            "player.asset+=1;"
+        ]
+    },
+    {
+        "id": 10,
+        "description": "一位教徒宣称世界上是有神明的",
+        "condition": "function(){return(player.cthulhu!=undefined)}",
+        "left": "同意",
+        "right": "反驳",
+        "result": [
+            "player.san-=1;",
+            "player.kindness=0;player.san+=1;"
+        ]
+    },
+    {
+        "id": 11,
+        "description": "你在潜水时回想起梦中的古城，是否要去海洋的更深处探索",
+        "condition": "function(){return(player.laraye==1);}",
+        "left": "前往深处",
+        "right": "远离",
+        "result": [
+            "player.laraye=2;player.san-=1;player.asset+=5;if(greater(Math.random(),0.5)){gameover('cthulhu');getTips('你感到头晕目眩');}else{getTips('你发现了财富');};",
+            ""
+        ]
+    },
+    {
+        "id": 12,
+        "description": "你最近感觉诸事不顺，决定去寺庙烧香",
+        "left": "使用上好的香(3资产)",
+        "right": "使用普通香(1资产)",
+        "result": [
+            "if(greater(player.asset,2)){player.asset-=3;player.san+=1;player.kindness+=1;}else{getTips('你没有足够的钱');};",
+            "if(greater(player.asset,0)){player.asset-=1;player.kindness+=1;}else{getTips('你没有足够的钱');};"
+        ]
+    },
+    {
+        "id": 13,
+        "description": "你捡到一条看上去价值不菲的项链",
+        "left": "收入囊中",
+        "right": "寻找失主",
+        "result": [
+            "player.asset+=5;player.kindness-=1;",
+            "player.kindness+=1;"
+        ]
+    },
+    {
+        "id": 14,
+        "description": "一条狗冲向你",
+        "left": "踢它一脚",
+        "right": "躲避",
+        "result": [
+            "player.kindness-=1;",
+            ""
+        ]
+    }
+]

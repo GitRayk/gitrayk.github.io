@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../../img/icon.png">
+    <link rel="stylesheet" href="../../../sheet.css" type="text/css" class="sheet">
+    <link rel="stylesheet" href="../../../mobile-sheet.css" type="text/css">
+    <script src="../../../skin.js"></script>
+    <title>尼伯龙根</title>
+</head>
+
+<body>
+    <div class="head-title">
+        <a href="../../../index.html"><img src="../../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+		&nbsp;&nbsp;&nbsp;<a href="../../article.html" class="hyperlink" style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+		&nbsp;&nbsp;&nbsp;<a href="../../../about/about.html" class="hyperlink" id="about">关于</a>
+	    </span> 
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+    
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../../css/css-index.html">CSS</a></li>
+                        <li><a href="../../html/html-index.html">HTML</a></li>
+                        <li><a href="../../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="./python-index.html">Python</a></li>
+                        <li><a href="../c/c-index.html">C/C++</a></li>
+                        <li><a href="../others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>python爬虫入门(三)</h1><hr>
+        <div class="article-text">
+            <h4 class="date">2021-8-19</h4>
+            <p>
+                对于人来说，短时间内访问网站的次数是有限的，
+                但使用爬虫却可以在短时间内多次访问，使服务器压力大增，
+                所以服务器并不是那么欢迎爬虫，会使用一些手段进行反爬<br>
+                （同时也应明白，我们使用脚本也应该有一定限度）
+            </p>
+            <hr>
+            <p>
+                有些网站会在发现访问服务器的是脚本时就会禁止，所以我们需要对脚本的访问做一些伪装<br>
+                在之前学习requests.get()时，提到的headers参数用于构造请求头，
+                其中的<strong>User-Agent就是用来告诉HTTP服务器， 客户端使用的操作系统和浏览器的名称和版本值</strong><br>
+            </p>
+            <p>
+                <b>获取它也很简单，只需要在任意浏览器中按F12进入开发者模式，选择Network，
+                之后刷新页面，就会看到很多的请求，随便查看一个就可以找到该浏览器的User-Agent参数</b><br>
+            </p>
+            <p>
+                <b>在用脚本访问时，构造一个dict作为headers参数在调用get()或post()就可以将脚本伪装成浏览器访问</b><br>
+                更好的方式是使用User-Agent池来解决（收集一堆User-Agent的方式，或者是随机生成User-Agent）
+            </p>
+            <hr>
+            <p>
+                短时间内服务器收到多次请求，可能会要求输入验证码或进行人机验证，
+                面对这种问题最简单的方法就是<b>每次访问都设置一个间隔时间</b>
+            </p>
+            <hr>
+            <p>
+                当网站设定了访问速度、次数、流量之类的信息时，很可能会封禁我们ip<br>
+                这时候我们就需要使用代理，以设定一个dict作为get或post的<strong>proxies</strong>参数，
+                键值对为 协议: ip <br>
+                如{'http': 'http://x.x.x.x:x', 'https': 'https://x.x.x.x:x'}
+            </p>
+            <hr>
+            <p>
+                有些网站通过检查cookies来查看发起请求的用户是否具备相应权限，以此来进行反爬<br>
+                在此之前，先了解以下<b>session</b>和<b>cookies</b><br>
+            </p>
+            <p>
+                <b>session对象可以存储特定用户会话所需的属性及配置信息。</b>
+                <b>当用户在应用程序的Web页之间跳转时，存储在Session对象中的变量将不会丢失，而是在整个用户会话中一直存在下去</b><br>
+                而cookies是网站为了辨别用户身份，进行Session跟踪而储存在用户本地终端上的数据（通常经过加密），由用户客户端计算机暂时或永久保存的信息<br>
+                <br>
+                requests库的session会话对象可以跨请求保持某些参数，
+                说白了，就是比如你使用session成功的登录了某个网站，
+                则在再次使用该session对象请求求该服务器下的其他网页都会默认使用该session之前使用的cookie等参数
+                （无需再次登录，因为cookies已经保存了我们的登录授权信息）<br>
+            </p>
+            <p>
+                <b>为了得到session对象，我们只需要使用<span class="code">requests.session()</span>来创建它</b><br>
+                之后用这个对象去get或post进行网页请求，使用起来与直接用requests相差的也不是很多<br>
+            </p>
+            <p>
+                不仅如此，当我们需要在短时间内请求多次同一站点时，直接使用 requests.get() 可能会相当慢，
+                尤其在请求次数很大时，整个程序可能会花费相当多的时间<br>
+                <b>而在我们使用 session.get() 时，请求所花时间将被大幅度缩短</b>
+            </p>
+            <p>
+                当我们需要自己自己指定cookies时，只需要设置其cookies参数即可
+            </p>
+            <hr>
+            <p>
+                更详细完整的反爬策略可以参考下文：
+                <a href="https://zhuanlan.zhihu.com/p/239595212" target="_blank" style="text-decoration: none;">知乎 - Python爬虫之常见的反爬手段和解决方法</a>
+            </p>
+            <hr>
+            <p class="previous">
+                <span class="hiden">》</span>
+                上一篇：<a href="spider_2.html">python爬虫入门(二)</a>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

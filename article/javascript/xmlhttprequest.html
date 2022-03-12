@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../img/icon.png">
+    <link rel="stylesheet" href="../../sheet.css" type="text/css" class="sheet">
+    <link rel="stylesheet" href="../../mobile-sheet.css" type="text/css">
+    <script src="../../skin.js"></script>
+    <title>XMLHttpRequest | 尼伯龙根</title>
+</head>
+
+<body>
+    <div class="head-title">
+        <a href="../../index.html"><img src="../../img/icon.png" width="30" height="30" alt="icon"
+                style="vertical-align:text-bottom;" /><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+            &nbsp;&nbsp;&nbsp;<a href="../article.html" class="hyperlink"
+                style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+            &nbsp;&nbsp;&nbsp;<a href="../../about/about.html" class="hyperlink" id="about">关于</a>
+        </span>
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../img/sun and moon.png" alt="暗夜模式" id="shift-skin"
+                onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../css/css-index.html">CSS</a></li>
+                        <li><a href="../html/html-index.html">HTML</a></li>
+                        <li><a href="./index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="../program/python/python-index.html">Python</a></li>
+                        <li><a href="../program/c/c-index.html">C/C++</a></li>
+                        <li><a href="../program/others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>AJAX - XMLHttpRequest 对象</h1>
+        <hr>
+        <div class="article-text">
+            <h4 class="date">2021-10-14</h4>
+            <p>
+                XMLHttpRequest 对象（即XHR）是属于 AJAX 中的内容，
+                <b>XMLHttpRequest 对象可以用于在后台与服务器交换数据，包括向服务器发送请求和接受响应。</b><br>
+                当我们使用 XML 或 JSON 的时候，就是使用该对象向服务器请求文件并使用服务器的响应的
+            </p>
+            <p>
+                AJAX即是 Asynchronous JavaScript And XML，
+                它并非编程语言，仅仅组合了：XMLHttpRequest 对象（从 web 服务器请求数据）、JavaScript 和 HTML DOM（显示或使用数据）
+            </p>
+            <hr>
+            <p>
+                大部分浏览器都有内建的 XMLHttpRequest 对象。<br>
+                然而对于IE5、IE6，不使用 XMLHttpRequest 对象而使用ActiveX对象，
+                所以为了兼容不同版本的浏览器，创建这样的对象我们需要进行一下检测
+            <pre>
+if (window.XMLHttpRequest) {
+    xhttp = new XMLHttpRequest();
+} 
+else {
+    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}</pre>
+            </p>
+            <hr>
+            <p>
+                成功创建好 XMLHttpRequest 对象后，可以通过<span class="code"> open()方法 </span>构造请求<br>
+                <span class="code">open(method, url, async, user, password)</span>
+                method为请求类型，最常用的方法是POST和GET两种。（写为字符串）<br>
+                url为要请求的服务器上的文件<br>
+                async为是否设置异步，当为true时（同时也是默认值），代码并不会阻塞并等待收到响应，而是继续执行后续代码。
+                当为false时，代码会阻塞。
+                <b>但如果服务器繁忙或缓慢，应用程序将挂起或停止，所以同步请求是一种不太支持的做法</b><br>
+                user和password为登录服务器的用户名和密码<br>
+                <br>
+                构造好请求后，使用<span class="code"> send()方法 </span>即可将请求发送出去
+            </p>
+            <hr>
+            <p>
+                <b>get：</b><br>
+                1、 一般用于信息获取，查询<br>
+                2、 使用URL传递参数<br>
+                3、 对发送信息的数量也有限制，一般在2000个字符（4k左右）<br>
+                4、 发送的信息任何人都是可见的（不安全）<br>
+                5、 get请求是幂等，执行一次和一万次效果一样，影响相同<br>
+                <b>post：</b><br>
+                1、 一般用于修改服务器上的资源。一般用作于发送表单数据，新建，修改，删除等等<br>
+                2、 对所发送信息的数量无限制<br>
+                3、 数据会嵌入到http的请求体中，安全<br>
+            </p>
+            <hr>
+            <p>
+                为了让代码能够异步，我们将 async 参数设置成为true，这时候我们还需要在创建XHR对象后设置 onreadystatechange 属性<br>
+                该属性值应设定为一个函数，当 readyState 变化时便会运行该函数<br>
+                在<span class="code"> xmlhttp.readyState==4 && xmlhttp.status==200 </span>的情况下表示整个请求过程已经完成，
+                并成功取得页面<br>
+                因此，一个完整的请求应包括：<br>
+            <pre>xmlhttp.onreadystatechange= ()=>
+{
+    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+        //返回页面后要做的事的代码
+    }
+}
+xmlhttp.open("GET", url, true);
+xmlhttp.send();</pre>
+            </p>
+            <hr>
+            <p>
+                部分其他 XMLHttpRequest 对象的常用方法：
+            <table>
+                <tr>
+                    <th>方法或属性</th>
+                    <th>意义</th>
+                </tr>
+                <tr>
+                    <td>abort()</td>
+                    <td>取消当前请求</td>
+                </tr>
+                <tr>
+                    <td>getAllResponseHeaders()</td>
+                    <td>返回头部信息</td>
+                </tr>
+                <tr>
+                    <td>setRequestHeader(header, value)</td>
+                    <td>添加报头信息，需要使用POST，可以添加表单信息</td>
+                </tr>
+                <tr>
+                    <td>responseXML</td>
+                    <td>以 XML 返回响应数据</td>
+                </tr>
+                <tr>
+                    <td>responseText</td>
+                    <td>以 字符串 返回响应数据</td>
+                </tr>
+                <tr>
+                    <td>status</td>
+                    <td>返回结果的状态号，200为正常，403被禁止，404为未找到</td>
+                </tr>
+                <tr>
+                    <td>statusText</td>
+                    <td>返回结果的状态文本</td>
+                </tr>
+                <tr>
+                    <td>readyState</td>
+                    <td>返回XHR对象当前的状态，其中4为成功发送并取得相应</td>
+                </tr>
+                <tr>
+                    <td>onreadystatechange</td>
+                    <td>该值可以用于设定当readystate发生变化时执行的函数，在同步请求中不太用的到</td>
+                </tr>
+            </table>
+            </p>
+            <hr>
+            <p>
+                <a style="text-decoration: none;"
+                    href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest">XMLHttpRequest 对象 - MDN Web
+                    Docs</a>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

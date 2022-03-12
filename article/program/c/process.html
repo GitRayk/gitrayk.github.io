@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../../img/icon.png">
+    <link rel="stylesheet" href="../../../sheet.css" type="text/css" class="sheet">
+    <link rel="stylesheet" href="../../../mobile-sheet.css" type="text/css">
+    <script src="../../../skin.js"></script>
+    <title>linux进程 | 尼伯龙根</title>
+</head>
+
+<body id="top">
+    <!--创建一个能跳转到当前页面顶部的按钮-->
+    <a href="#top" class="hyperlink"><div class="gotoTop">Top</div></a>
+
+    <div class="head-title">
+        <a href="../../../index.html"><img src="../../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+		&nbsp;&nbsp;&nbsp;<a href="../../article.html" class="hyperlink" style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+		&nbsp;&nbsp;&nbsp;<a href="../../../about/about.html" class="hyperlink" id="about">关于</a>
+	    </span> 
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+    
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../../css/css-index.html">CSS</a></li>
+                        <li><a href="../../html/html-index.html">HTML</a></li>
+                        <li><a href="../../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="../python/python-index.html">Python</a></li>
+                        <li><a href="./c-index.html">C/C++</a></li>
+                        <li><a href="../others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>Linux 下的C语言进程控制</h1><hr>
+        <div class="article-text">
+            <h4 class="date">2021-10-17</h4>
+            <h2>进程创建</h2>
+            <h3>pid_t fork(void):</h3>
+            <p>
+                包含在头文件<span class="code"> unistd.h </span>中>
+                其中<span> pid_t </span>是在<span class="code"> sys/types.h </span>中定义的宏<br>
+                <b>fork() 函数会创建一个子进程，相当于当前进程（父进程）的复制，
+                父进程数据空间、堆、栈等资源都会复制一份到子进程中。</b><br>
+                在子进程创建后，父进程和子进程都会停留在fork()函数的调用中等待返回，
+                这就意味着该函数会在父子进程中分别返回一次。<br>
+                <b>在父进程中，fork() 返回子进程的pid<br>
+                在子进程中，fork() 返回0</b><br>
+                当发生错误时，返回负值。<br>
+                可以通过返回值检测当前执行的是父进程还是子进程。<br>
+                当返回后，父进程和子进程会一起继续执行后续的代码，而之前已经执行过的代码子进程是不会再执行一遍的
+            </p>
+            <hr>
+            <h3>pid_t wait(int *__stat_loc):</h3>
+            <p>
+                包含在头文件 <span class="code"> wait.h </span>中<br>
+                wait() 常与 fork() 一起出现<br>
+                <b>父进程一旦调用了wait就立即阻塞自己，由wait自动分析是否当前进程的某个子进程已经退出，
+                当找到这样一个进程时，便会彻底销毁该子进程，并收集退出信息储存在参数 status 中，之后返回子进程的pid</b><br>
+                如果找不到这样的进程，父进程便会一直阻塞<br>
+                如果我们不关心子进程是如何退出的，形参填NULL即可<br>
+                当当前进程没有子进程时，wait就会返回-1表示调用失败，同时errno被置为ECHILD。
+            </p>
+            <hr>
+            <h3>pid_t waitpid(pid_t pid,int *status,int options)</h3>
+            <p>
+                使用头文件<span class="code"> wait.h </span>和<span class="code"> sys/types.h </span><br>
+                waitpid()和wait()的作用相似，可以等待指定pid的进程，或者说，wait()就是包装后的wait()<br>
+                当参数 pid = -1 时，即等待任意一个子进程退出，此时作用和wait()一样<br>
+                当参数 pid = 0 时，等待同一个进程组中的任意子进程<br>
+                参数options是一个位掩码，通常设为0，也可以取为WNOHANG、WUNTRACED<br>
+                当设为WNOHANG时，则该函数会立即产生一个返回值，若没有找到子进程则返回0
+            </p>
+            <hr>
+            <h2>共享内存</h2>
+            <h3>int shm_open(const char *name, int oflag, mode_t mode)：</h3>
+            <p>
+                使用时需引入一下头文件：<br>
+                <span class="code">#include &lt;sys/mman.h&gt; </span><br>
+                <span class="code">#include &lt;sys/stat.h&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* 对于模式常量 */</span><br>
+                <span class="code">#include &lt;fcntl.h&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* 对于 oflag 常量 */</span><br>
+                除此之外，<b>还很可能需要在编译时连接库</b>，使用<span class="code">-lrt</span><br>
+                该函数会打开或创建一个共享内存对象（通常保存在 /dev/shm/ 路径下），
+                实质就是打开文件，可以使用文件相关函数，也需要close()关闭。<br>
+                返回值为打开共享内存文件描述符fd，成功时为正数，失败时为负数<br>
+                (Linux系统将所有设备都当作文件来处理，而Linux用文件描述符来标识每个文件对象。)<br>
+                其中各参数：
+                <ul>
+                    <li><b>name: </b> 表示文件名，只能填名字，不能填路径</li>
+                    <li>
+                        <b>oflag: </b> 
+                        是一个位掩码，表示文件的操作属性（权限），可以包括以下宏的位运算：
+                        <ul>
+                            <li><b>O_RDONLY</b> 只读</li>
+                            <li><b>O_RDWR</b> 读写</li>
+                            <li><b>O_CREAT</b> 若文件不存在，则创建</li>
+                            <li><b>O_TRUNC</b> 若文件已存在，则截断</li>
+                            <li><b>O_EXCL</b> 在指定O_CREAT的情况下若文件已存在，则返回错误</li>
+                        </ul>
+                    </li>
+                    <li><b>mode：</b> 表示文件的共享模式，应在指定O_CREAT的情况下使用，即创建文件后的用户权限</li>
+                </ul>
+            </p>
+            <hr>
+            <h3>int ftruncate(int fd, off_t length)：</h3>
+            <p>
+                位于头文件<span class="code"> unistd.h </span>中<br>
+                ftruncate()会将参数 fd 指定的文件大小改为参数 length 指定的大小。如果原来的文件大小比参数length大，则超过的部分会被删去。<br>
+                off_t 是 long 的宏<br>
+                使用该函数时，打开的文件必须具有写入权限<br>
+                该函数的功能是重置文件的大小，任何open函数打开的文件都可以用该函数，包括但不限于shm_open打开的文件<br>
+                执行成功则返回0，失败返回-1，错误原因存于errno（errno.h中定义的一个int型变量）。
+            </p>
+            <hr>
+            <h3>void* mmap(void* start,size_t length,int prot,int flags,int fd,off_t offset);</h3>
+            <p>
+                位于头文件 <span class="code"> sys/mman.h </span>中<br>
+                <b>该函数的功能是将文件映射到内存中，使得我们用操作内存指针的方式来操作文件数据。</b><br>
+                文件被映射到多个页上，如果文件的大小不是所有页的大小之和，最后一个页不被使用的空间将会清零。
+                即映射的内存空间最小单位为页<br>
+                其中各参数：
+                <ul>
+                    <li><b>start：</b> 将文件映射到的内存地址，一般应该传递NULL来由Linux内核指定。</li>
+                    <li><b>length：</b> 映射区的长度。长度单位是以字节为单位，不足一内存页按一内存页处理</li>
+                    <li><b>prot: </b> 是一个位掩码，映射的内存区域的操作权限（保护属性），包括PROT_READ、PROT_WRITE、PROT_EXEC、PROT_NONE</li>
+                    <li>
+                        <b>flags: </b> 位掩码，指定映射对象的类型，包括
+                        <ul>
+                            <li>MAP_SHARED： 与其它所有映射这个对象的进程共享映射空间。对共享区的写入，相当于输出到文件。直到msync()或者munmap()被调用，文件实际上不会被更新。</li>
+                            <li>MAP_PRIVATE： 建立一个写入时拷贝的私有映射。内存区域的写入不会影响到原文件。这个标志和以上标志是互斥的，只能使用其中一个。</li>
+                            <li>MAP_ANON: 进行匿名映射，此时fd参数要填-1</li>
+                            <li>等
+                        </ul>
+                    </li>
+                    <li><b>fd：</b> 用来建立映射区的文件描述符，用 shm_open打开或者open打开的文件。</li>
+                    <li><b>offset：</b> 映射文件相对于文件头的偏移位置，应该按4096字节对齐。</li>
+                </ul>
+                成功执行时，mmap()返回被映射区的指针；失败时，mmap()返回MAP_FAILED。<br>
+                要对该映射的内存写入内容，可以使用sprintf()或write()函数，在此之前先将mmap的返回值类型由 void* 转换成 char*
+            </p>
+            <hr>
+            <h3>int munmap(void *start,size_t length)：</h3>
+            <p>
+                使用头文件<span class="code"> unistd.h </span>和<span class="code"> sys/mman.h </span><br>
+                <b>函数功能是取消参数start所指的映射内存起始地址，参数length则是欲取消的内存大小。</b><br>
+                当进程结束或利用exec相关函数来执行其他程序时，映射内存会自动解除，但关闭对应的文件描述符时不会解除映射。<br>
+                返回值: 如果解除映射成功则返回0，否则返回－1，错误原因存于errno中
+            </p>
+            <hr>
+            <h3>int shm_unlink(const char *name):</h3>
+            <p>
+                使用头文件<span class="code"> sys/stat.h </span>和<span class="code"> fcntl.h </span><br>
+                该函数用于删除指定的共享内存对象
+            </p>
+            <hr>
+            <h2>(匿名)管道通信</h2>
+            <h3>int pipe(int filedes[2]): </h3>
+            <p>
+                使用头文件<span class="code"> unistd.h </span><br>
+                该函数会在两个进程中创建一个<b>匿名(普通)管道</b>，
+                参数数组即为要通信的两个文件的文件描述符（不需要我们赋值，在调用pipe函数后直接将[0]和[1]当做文件操作对象）<br>
+                <b>其中[0]为管道读端，只允许从该端读取管道中的信息；[1]为管道写端，只允许从该段向管道中写信息</b><br>
+                (或许把它看作一个FIFO的队列会更好理解，[1]为队列尾，[0]为队列头)<br>
+                管道可以看作是一个特殊共享文件，实质是在内存区当中开辟一个固定大小的缓冲区<br>
+                从管道中读取走的那部分信息会从缓冲区中清楚<br>
+                需要注意的是<b>管道是半双工通信的，如果需要双方通信时，需要建立起两个管道</b><br>
+                <b>管道只能用于父子进程(fork())或者兄弟进程之间，即具有亲缘关系的进程</b><br>
+                <b>返回值：成功 0 失败 -1</b>，错误信息保存在errno中<br>
+            </p>
+            <p>
+                通常情况下，一个进程先用pipe()创建一个管道后，再用fork()创建子进程，实现两个父子进程间的通信
+                (当然我们也可以在同一个进程中使用pipe，但那有什么意义呢？)
+            </p>
+            <p>
+                对管道的读写，可以使用文件相关的函数read()、write()、close()，(这些函数的参数都是文件描述符)<br>
+                如read(filedes[0], buf, BUF_LEN)可将管道中指定字节数读到buf中<br>
+            </p>
+            <p>
+                <img src="../../../img/pipe.png" alt="管道" width="100%" height="100%"><br>
+                <b>对于不再使用的管道端，一定要记得用close()关闭它</b><br>
+                当管道中没有数据且使用read()时，若管道写端引用计数（即描述符数量）为0，则read()直接返回0，相当于读文件结束。
+                若写端引用计数不为0，那么read()会阻塞在那里等待有数据被写入管道<br>
+                对于读端引用计数也是一样的，所以一定要关闭
+            </p>
+            <p>
+                很多时候，一个进程对一个管道不会既读又写，所以在进程中我们先关闭一个端口<br>
+                <b>如果要双向通信，请使用两个管道</b><br>
+                可能发生的坏事：当一个管道读和写各仅有一个引用且来自于同一个进程，
+                此时调用read()会使进程阻塞，然而只有它自己可以将数据写入管道，但它阻塞在那了，导致这个进程无法终止
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

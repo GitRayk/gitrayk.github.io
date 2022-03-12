@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../img/icon.png">
+    <link rel="stylesheet" href="../../sheet.css" type="text/css" class="sheet">
+    <link rel="stylesheet" href="../../mobile-sheet.css" type="text/css">
+    <script src="../../skin.js"></script>
+    <title>尼伯龙根</title>
+</head>
+
+<body>
+    <div class="head-title">
+        <a href="../../index.html"><img src="../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+		&nbsp;&nbsp;&nbsp;<a href="../article.html" class="hyperlink" style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+		&nbsp;&nbsp;&nbsp;<a href="../../about/about.html" class="hyperlink" id="about">关于</a>
+	    </span> 
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+    
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../css/css-index.html">CSS</a></li>
+                        <li><a href="./html-index.html">HTML</a></li>
+                        <li><a href="../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="../program/python/python-index.html">Python</a></li>
+                        <li><a href="../program/c/c-index.html">C/C++</a></li>
+                        <li><a href="../program/others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>多媒体</h1><hr>
+        <div class="article-text">
+            <p>
+                要为html页面增加嵌入式对象，可以使用<span class="code">&lt;object&gt;标签</span><br>
+                它允许将插件（包含但不限于多媒体、js小程序）嵌入到网页当中<del>使其看起来更像是qq空间</del><br>
+                并使用<span class="code">data属性</span>指定插件的url<br>
+                而标签的内容即为标签失效时的替换内容（并不一定是文本）
+            </p>
+            <p>
+                除了object之外，<span class="code">&lt;embed /&gt;标签</span>同样支持插入嵌入式对象<br>
+                其<span class="code">src属性</span>指定了对象的url
+                <b>但要注意的是，它是一个空标签，没有办法像<span class="code">&lt;object&gt;标签</span>一样指定替换的内容</b>
+            </p>
+            <hr>
+            <p>
+                对于音频，在html5中我们有更合适的方法：使用<span class="code">&lt;audio&gt;标签</span><br>
+                其具有的属性如下表：
+                <table>
+                    <tr><th>属性</th><th>说明</th></tr>
+                    <tr><td>src</td><td>指定音频资源的url</td></tr>
+                    <tr><td>autoplay</td><td>其值是autoplay，自动播放</td></tr>
+                    <tr><td>controls</td><td>其值是controls，显示控制组件</td></tr>
+                    <tr><td>loop</td><td>其值是loop，循环播放</td></tr>
+                    <tr><td>preload</td><td>其值是preload，预加载</td></tr>
+                </table>
+                该标签中的内容也是标签失效时的替换内容
+            </p>
+            <p>
+                <b>当放弃使用audio的src属性来指定资源时</b>，可以在内容中增加<span class="code">&lt;source /&gt;标签</span><br>
+                <span class="code">&lt;source /&gt;标签</span>通过它自己的<span class="code">&lt;src&gt;属性</span>为audio提供音源<br>
+                但稍微不同的是，该标签可以出现多次，当前一个指定的资源失效时会自动寻找下一个<br>
+                所有与audio这个标签相似的标签都可以这么用
+            </p>
+            <hr>
+            <p>
+                事实上为了防止资源失效（尤其是对于浏览器不一定支持的资源类型），常使用html5 - object - embed的多级嵌套指定替换内容<br>
+                举个例子：
+                <pre>
+&lt;video width="320" height="240" controls="controls"&gt;
+    &lt;source src="movie.mp4" type="video/mp4" /&gt;
+    &lt;source src="movie.ogg" type="video/ogg" /&gt;
+    &lt;source src="movie.webm" type="video/webm" /&gt;
+    &lt;object data="movie.mp4" width="320" height="240"&gt;
+        &lt;embed src="movie.swf" width="320" height="240" /&gt;
+    &lt;/object&gt;
+&lt;/video&gt;
+                </pre>
+                在第一级video中的三个source资源都失效时，进入到object元素；第二级的object元素也失效时，进入embed元素；而embed没法办指定替换文本，所以若是它失效就彻底失效了<br>
+                这一手段很大程度上减小了资源失效的概率
+            </p>
+            <hr>
+            <p>
+                要播放视频资源，可以使用<span class="code">&lt;video&gt;标签</span>，其使用方法基本于video一致
+            </p>
+            <hr>
+            <p>
+                在我实际建设网站的过程中，发现网易云提供的外源代码使用了<span class="code">&lt;iframe&gt;标签</span>作内联框架来播放音频<br>
+                <pre>
+&lt;iframe frameborder="no" border="0" 
+marginwidth="0" 
+marginheight="0" 
+width=286 height=86 
+style="max-width:100%;" 
+src="//music.163.com/outchain/player?type=2&id=1828858733&auto=0&height=66"&gt;
+&lt;/iframe&gt;
+                </pre>
+                等我再研究一下后进行补充
+            </p>
+        </div>
+        
+        <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=286 height=86 style="max-width:100%;" src="//music.163.com/outchain/player?type=2&id=1828858733&auto=0&height=66"></iframe> -->
+    </div>
+</body>
+
+</html>
