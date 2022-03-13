@@ -143,7 +143,8 @@
                     <li><b>--name=""</b> : 为容器命名</li>
                     <li><b>--network=""</b>: 将容器添加到指定的网络中去</li>
                 </ul>
-                其它还有端口映射、设置环境变量等参数，可以通过查询帮助来获取完整参数表<br><br>
+                其它还有端口映射、设置环境变量等参数，可以通过查询帮助来获取完整参数表<br>
+                也可以使用 <span class="code">docker create</span> 来创建一个容器但不启动它，用法与 run 一致<br><br>
 
                 <b>进入容器: </b><br>
                 <span class="code">docker attach 容器 或 docker exec 容器 命令</span><br>
@@ -196,6 +197,13 @@
                 <b>创建好 dockerfile 文件后，可以使用<span class="code">docker build -t 镜像名[:版本] . </span> 来生成 image 文件。</b><br>
                 注意指令最后有一个 “.” ，这通常是将指定目录下的文件一起打包提供给 docker 引擎生成 image 使用。<br>
                 所以在目录下不要放一些无用文件，否则也会被打包提交。
+            </p>
+            <p>
+                <b>将镜像打包成 tar 压缩文件</b>: <span class="code">docker save [OPTIONS] IMAGE [IMAGE...]</span><br>
+                参数 -o 指定输出的文件<br><br>
+
+                <b>导入通过 save 打包的镜像</b>: <span class="code">docker load [OPTIONS]</span><br>
+                参数 -i 指定导入的文件
             </p>
         </div>
     </div>
