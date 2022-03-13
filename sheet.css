@@ -60,6 +60,7 @@
         max-width: 20%;
         border-radius: 10px;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 20;
     }
     .nav-article>p {
         padding-left: 20px;
@@ -107,6 +108,7 @@
         border-radius: 10px;
         left: 100%;
         top: 0;
+        z-index: 2;
     }
     /*--------日常的下拉栏------------*/
     .nav-article .daily:hover .dropdown-content-daily {
@@ -121,6 +123,7 @@
         background-color: white;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         border-radius: 10px;
+        z-index: 2;
     }
     /*---------下拉栏----------*/
     .nav-article .dropdown:hover .dropdown-content{
@@ -136,6 +139,7 @@
         background-color: white;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         border-radius: 10px;
+        z-index: 2;
     }
     /*------------贴文页面的内容总览--------*/
     .article {
