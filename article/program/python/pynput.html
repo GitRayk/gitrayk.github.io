@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="../../../sheet.css" type="text/css" class="sheet">
     <link rel="stylesheet" href="../../../mobile-sheet.css" type="text/css">
     <script src="../../../skin.js"></script>
+    <script src="../../../prepareBeforeStart.js"></script>
     <title>尼伯龙根</title>
 </head>
 
-<body>
+<body onload="readyForRead()">
     <div class="head-title">
         <a href="../../../index.html"><img src="../../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
         <span>
@@ -82,7 +83,7 @@
                 除此之外，pynput.mouse还有Button类，它包含鼠标上的按键；pynput.keyboard还有Key类，它包含了键盘上的各种特殊按键。具体的意义参见文档
             </p>
             <hr>
-            <h3>鼠标的控制</h3>
+            <h2>鼠标的控制</h2>
             <p>
                 使用前通常使用<span class="code">from pynput.mouse import Button, Controller</span><br>
                 对于已经创建好的控制器实例，只需调用以下变量或方法：
@@ -100,7 +101,7 @@
                 <br>
             </p>
             <hr>
-            <h3>键盘的控制</h3>
+            <h2>键盘的控制</h2>
             <p>
                 使用前通常使用<span class="code">from pynput.keyboard import Key, Controller</span><br>
                 与鼠标类似，对键盘实例使用以下变量或方法：

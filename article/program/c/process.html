@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="../../../sheet.css" type="text/css" class="sheet">
     <link rel="stylesheet" href="../../../mobile-sheet.css" type="text/css">
     <script src="../../../skin.js"></script>
+    <script src="../../../prepareBeforeStart.js"></script>
     <title>linux进程 | 尼伯龙根</title>
 </head>
 
-<body id="top">
+<body id="top" onload="readyForRead()">
     <!--创建一个能跳转到当前页面顶部的按钮-->
     <a href="#top" class="hyperlink"><div class="gotoTop">Top</div></a>
 
@@ -66,7 +67,7 @@
         <div class="article-text">
             <h4 class="date">2021-10-17</h4>
             <h2>进程创建</h2>
-            <h3>pid_t fork(void):</h3>
+            <h2>pid_t fork(void):</h2>
             <p>
                 包含在头文件<span class="code"> unistd.h </span>中>
                 其中<span> pid_t </span>是在<span class="code"> sys/types.h </span>中定义的宏<br>
@@ -81,7 +82,7 @@
                 当返回后，父进程和子进程会一起继续执行后续的代码，而之前已经执行过的代码子进程是不会再执行一遍的
             </p>
             <hr>
-            <h3>pid_t wait(int *__stat_loc):</h3>
+            <h2>pid_t wait(int *__stat_loc):</h2>
             <p>
                 包含在头文件 <span class="code"> wait.h </span>中<br>
                 wait() 常与 fork() 一起出现<br>
@@ -92,7 +93,7 @@
                 当当前进程没有子进程时，wait就会返回-1表示调用失败，同时errno被置为ECHILD。
             </p>
             <hr>
-            <h3>pid_t waitpid(pid_t pid,int *status,int options)</h3>
+            <h2>pid_t waitpid(pid_t pid,int *status,int options)</h2>
             <p>
                 使用头文件<span class="code"> wait.h </span>和<span class="code"> sys/types.h </span><br>
                 waitpid()和wait()的作用相似，可以等待指定pid的进程，或者说，wait()就是包装后的wait()<br>
@@ -103,7 +104,7 @@
             </p>
             <hr>
             <h2>共享内存</h2>
-            <h3>int shm_open(const char *name, int oflag, mode_t mode)：</h3>
+            <h2>int shm_open(const char *name, int oflag, mode_t mode)：</h2>
             <p>
                 使用时需引入一下头文件：<br>
                 <span class="code">#include &lt;sys/mman.h&gt; </span><br>
@@ -132,7 +133,7 @@
                 </ul>
             </p>
             <hr>
-            <h3>int ftruncate(int fd, off_t length)：</h3>
+            <h2>int ftruncate(int fd, off_t length)：</h2>
             <p>
                 位于头文件<span class="code"> unistd.h </span>中<br>
                 ftruncate()会将参数 fd 指定的文件大小改为参数 length 指定的大小。如果原来的文件大小比参数length大，则超过的部分会被删去。<br>
@@ -142,7 +143,7 @@
                 执行成功则返回0，失败返回-1，错误原因存于errno（errno.h中定义的一个int型变量）。
             </p>
             <hr>
-            <h3>void* mmap(void* start,size_t length,int prot,int flags,int fd,off_t offset);</h3>
+            <h2>void* mmap(void* start,size_t length,int prot,int flags,int fd,off_t offset);</h2>
             <p>
                 位于头文件 <span class="code"> sys/mman.h </span>中<br>
                 <b>该函数的功能是将文件映射到内存中，使得我们用操作内存指针的方式来操作文件数据。</b><br>
@@ -169,7 +170,7 @@
                 要对该映射的内存写入内容，可以使用sprintf()或write()函数，在此之前先将mmap的返回值类型由 void* 转换成 char*
             </p>
             <hr>
-            <h3>int munmap(void *start,size_t length)：</h3>
+            <h2>int munmap(void *start,size_t length)：</h2>
             <p>
                 使用头文件<span class="code"> unistd.h </span>和<span class="code"> sys/mman.h </span><br>
                 <b>函数功能是取消参数start所指的映射内存起始地址，参数length则是欲取消的内存大小。</b><br>
@@ -177,14 +178,14 @@
                 返回值: 如果解除映射成功则返回0，否则返回－1，错误原因存于errno中
             </p>
             <hr>
-            <h3>int shm_unlink(const char *name):</h3>
+            <h2>int shm_unlink(const char *name):</h2>
             <p>
                 使用头文件<span class="code"> sys/stat.h </span>和<span class="code"> fcntl.h </span><br>
                 该函数用于删除指定的共享内存对象
             </p>
             <hr>
             <h2>(匿名)管道通信</h2>
-            <h3>int pipe(int filedes[2]): </h3>
+            <h2>int pipe(int filedes[2]): </h2>
             <p>
                 使用头文件<span class="code"> unistd.h </span><br>
                 该函数会在两个进程中创建一个<b>匿名(普通)管道</b>，

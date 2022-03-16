@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="../../../sheet.css" type="text/css" class="sheet">
     <link rel="stylesheet" href="../../../mobile-sheet.css" type="text/css">
     <script src="../../../skin.js"></script>
+    <script src="../../../prepareBeforeStart.js"></script>
     <title>尼伯龙根</title>
 </head>
 
-<body>
+<body onload="readyForRead()">
     <div class="head-title">
         <a href="../../../index.html"><img src="../../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
         <span>
@@ -67,7 +68,7 @@
             </p>
             <hr>
             <p>
-                <h3>wifi接口</h3>
+                <h2>wifi接口</h2>
                 pywifi中定义了PyWiFi类来管理接口，使用<span class="code">pywifi.PyWiFi()</span>来创建这样一个实例<br>
                 这个实例就是表示计算机WiFi接口的。该对象具有<span class="code">interfaces()成员变量</span>，其返回值是一个网卡列表，在一般情况下列表中的第一个元素即是需要的wifi网卡，所以可以直接通过<span class="code">interfaces()[0]</span>来获取<br>
                 <br>
@@ -96,7 +97,7 @@
             </p>
             <hr>
             <p>
-                <h3>常量库</h3>
+                <h2>常量库</h2>
                 为了引入pywifi的常量库，需要使用<span class="code">from pywifi import const</span><br>
                 其状态常量为：
                 <pre>
@@ -132,7 +133,7 @@ KEY_TYPE_PASSPHRASE = 1
             </p>
             <hr>
             <p>
-                <h3>配置文件</h3>
+                <h2>配置文件</h2>
                 配置文件主要有以下几个参数：
                 <table>
                     <tr><th>成员变量</th><th>意义</th></tr>

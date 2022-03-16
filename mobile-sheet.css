@@ -241,20 +241,63 @@
     }
 
     /*------设置一个可以跳转到当前网页顶部的按钮------*/
-    /*目前仅在bat.html中使用了*/
     .gotoTop, .gotoTop:hover{
-    color: black;
-    background-color: rgb(255, 255, 255);
-    border-radius: 5px;
-    text-align: center;
-    padding-top: 15px;
-    box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
-    width: 50px;
-    height: 35px;
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 10;
+        color: black;
+        background-color: rgb(255, 255, 255);
+        border-radius: 5px;
+        text-align: center;
+        padding-top: 15px;
+        box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
+        width: 50px;
+        height: 35px;
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 10;
+    }
+
+    /* 有文章的页面需要增加一个目录，方便快速查阅 */
+.content{
+    /* 使用 flex 容器对目录内部调整排列方式 */
+    display: flex;
+
+    background-color: rgba(255, 255, 255, 1);
+    width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    
+    position: absolute;
+    top: 20%;
+    right: -190px;
+    
+    /* 当鼠标移动到目录上时才会显示目录内容，需要设置一个过渡 */
+    transition-duration: 1s;
+    transition-property: right;
+}
+
+.content-guider{
+    flex-shrink: 3;
+}
+
+.content-index{
+    padding: 10px;
+    width: 100%;
+}
+
+.content-index>a{
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    color:rgb(0, 0, 0);
+}
+
+.content-index>a:hover{
+    color: rgb(59, 59, 59);
+}
+
+.content:hover{
+    right: -5px;
 }
 }
 

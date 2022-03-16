@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="../../../sheet.css" type="text/css" class="sheet">
     <link rel="stylesheet" href="../../../mobile-sheet.css" type="text/css">
     <script src="../../../skin.js"></script>
+    <script src="../../../prepareBeforeStart.js"></script>
     <title>linux进程 | 尼伯龙根</title>
 </head>
 
-<body id="top">
+<body id="top" onload="readyForRead()">
     <!--创建一个能跳转到当前页面顶部的按钮-->
     <a href="#top" class="hyperlink"><div class="gotoTop">Top</div></a>
 
@@ -65,7 +66,7 @@
         <h1>C语言线程控制</h1><hr>
         <div class="article-text">
             <h4 class="date">2021-10-22</h4>
-            <h3>int pthread_attr_init(pthread_attr_t *attr)：</h3>
+            <h2>int pthread_attr_init(pthread_attr_t *attr)：</h2>
             <p>
                 包含在<span class="code"> pthread.h 头文件 </span>中<br>
                 <b>创建一个线程时，会有一个<span class="code"> pthread_attr_t 结构体 </span>保存线程的相关属性</b><br>
@@ -75,7 +76,7 @@
                 它的使用与 pthread_attr_init 一致，并在成功销毁后返回0，否则返回非0
             </p>
             <hr>
-            <h3>int pthread_create(pthread_t *tidp,const pthread_attr_t *attr, void *(*start_rtn)(void*),void *arg);</h3>
+            <h2>int pthread_create(pthread_t *tidp,const pthread_attr_t *attr, void *(*start_rtn)(void*),void *arg);</h2>
             <p>
                 <!-- <b>该函数是在类Unix操作系统（Unix、Linux、Mac OS X等）的创建线程的函数</b>， -->
                 包含在<span class="code"> pthread.h 头文件 </span>中<br>
@@ -100,7 +101,7 @@
                 需要注意的是，因为它非linux的系统库，而是POSIX线程库，<b>在linux环境中编译时需加 -lpthread 或 -pthread </b>
             </p>
             <hr>
-            <h3>int pthread_join(pthread_t thread, void **retval):</h3>
+            <h2>int pthread_join(pthread_t thread, void **retval):</h2>
             <p>
                 包含在<span class="code"> pthread.h 头文件 </span>中<br>
                 该函数以阻塞的方式等待thread指定的线程结束。当函数返回时，被等待线程的资源会被收回，返回值储存在第二个参数中。<br>
@@ -113,7 +114,7 @@
                     所以一般都会用 pthread_join 进行等待）</b><br>
             </p>
             <hr>
-            <h3>void pthread_exit(void* retval): </h3>
+            <h2>void pthread_exit(void* retval): </h2>
             <p>
                 当一个线程要结束的时候，可以像使用 exit() 一样调用该函数。<br>
                 该函数的参数是线程结束时要返回的代码，它会被 pthread_join() 的调用者接收<br>
@@ -126,7 +127,7 @@
                 pthread_cancel 终止同一进程的其他线程
             </p>
             <hr>
-            <h3>int pthread_cancel(pthread_t thread):</h3>
+            <h2>int pthread_cancel(pthread_t thread):</h2>
             <p>
                 发送终止信号给thread线程，如果成功则返回0，否则为非0值。<br>
                 <b>pthread_cancel调用并不等待线程终止，它只提出请求。线程在取消请求(pthread_cancel)发出后会继续运行，

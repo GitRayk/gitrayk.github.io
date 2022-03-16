@@ -22,10 +22,4 @@ function sendwx() {
     document.getElementsByTagName("input")[0].value = "";
 }
 
-/* 实现根据文章自动生成目录
-利用文章中的 h3 标签中的内容作为目录内容，点击即可跳转。仅当检测到 div.article-text>h3 时会生成目录
-*/
-function createIndex(){
-    let indexs = document.querySelectorAll('div.article-text>h3');
-    console.log(indexs);
-}
+

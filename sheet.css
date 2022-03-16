@@ -268,3 +268,47 @@
     margin-top: 5px;
     float: right;
 }
+
+/* 有文章的页面需要增加一个目录，方便快速查阅 */
+.content{
+    /* 使用 flex 容器对目录内部调整排列方式 */
+    display: flex;
+
+    background-color: rgba(255, 255, 255, 1);
+    width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    
+    position: absolute;
+    top: 20%;
+    right: -190px;
+    
+    /* 当鼠标移动到目录上时才会显示目录内容，需要设置一个过渡 */
+    transition-duration: 1s;
+    transition-property: right;
+}
+
+.content-guider{
+    flex-shrink: 3;
+}
+
+.content-index{
+    padding: 10px;
+    width: 100%;
+}
+
+.content-index>a{
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    color:rgb(0, 0, 0);
+}
+
+.content-index>a:hover{
+    color: rgb(59, 59, 59);
+}
+
+.content:hover{
+    right: -5px;
+}

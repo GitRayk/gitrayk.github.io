@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="../../sheet.css" type="text/css" class="sheet">
     <link rel="stylesheet" href="../../mobile-sheet.css" type="text/css">
     <script src="../../skin.js"></script>
+    <script src="../../prepareBeforeStart.js"></script>
     <title>XML 简单介绍 | 尼伯龙根</title>
 </head>
 
-<body id="top">
+<body id="top" onload="readyForRead()">
     <!--创建一个能跳转到当前页面顶部的按钮-->
     <a href="#top" class="hyperlink"><div class="gotoTop">Top</div></a>
 
@@ -65,7 +66,7 @@
         <h1>XML基础</h1><hr>
         <div class="article-text">
             <h4 class="date">2021-10-10</h4>
-            <h3>XML基本情况</h3>
+            <h2>XML基本情况</h2>
             <p>
                 XML只是一种仅用作数据存储和传输的标记语言，它不会做任何事，只是写作文本的形式而已。
                 使用XML，我们就可以使用短短几行 JS 语句来改变网页中的某些数据<br>
@@ -81,7 +82,7 @@
                 这也意味着我们没法仅通过file协议访问本地文件来查看XML的效果了。
             </p>
             <hr>
-            <h3>XML的浏览</h3>
+            <h2>XML的浏览</h2>
             <p>
                 在浏览器中打开XML文件只会，显示其树形结构，
                 但我们仍可以使用CSS为其设定样式：<br>
@@ -90,7 +91,7 @@
                 XSLT 会将 XML 文档转换成 HTMl 文档
             </p>
             <hr>
-            <h3>XML语法</h3>
+            <h2>XML语法</h2>
             <p>
                 XML文本开头使用<span class="code">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br>
                 其中<span class="code">version属性</span>描述了使用的XML的版本号，
@@ -114,7 +115,7 @@
                 book标签的id属性也是我随手捏造的，这里的id是我为了区分不同的book
             </p>
             <hr>
-            <h3>XML解析</h3>
+            <h2>XML解析</h2>
             <p>
                 为了获取一个 XML 文档，我们需要使用解析器，所有现代浏览器都内建了供读取和操作 XML 的 XML 解析器。
                 解析器把 XML 转换为 XML DOM 对象 - 可通过 JavaScript 操作的对象。<br>

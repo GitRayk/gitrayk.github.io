@@ -2,16 +2,17 @@
 <html>
 
 <head>
-    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <meta charset="utf-8" name="viewport" content="width=device-width; initial-scale=1">
     <!-- meta使用viewport来适配移动端浏览器 -->
     <link rel="icon" href="../../img/icon.png">
     <link rel="stylesheet" href="../../sheet.css" class="sheet" type="text/css">
     <link rel="stylesheet" href="../../mobile-sheet.css" type="text/css">
     <script src="../../skin.js"></script>
+    <script src="../../prepareBeforeStart.js"></script>
     <title>尼伯龙根</title>
 </head>
 
-<body>
+<body onload="readyForRead()">
     <div class="head-title">
         <a href="../../index.html"><img src="../../img/icon.png" width="30"
                 height="30" alt="icon" style="vertical-align:text-bottom;" /><span style="font-size: 20px;">
@@ -65,7 +66,7 @@
         <h1>CSS - 使用过渡和动画来实现动态效果</h1>
         <hr>
         <div class="article-text">
-            <h3>过渡：</h3>
+            <h2>过渡：</h2>
             <p>
                 <b>当一个属性的值发生变化时（前提条件）</b>，可以设定其变化的过渡持续时间
                 （这里的变化可以是:hover的变化，也可以是js的变化等等）<br>
@@ -148,7 +149,7 @@
                 </div>
             </p>
             <br style="clear: both;"><hr>
-            <h3>动画</h3>
+            <h2>动画</h2>
             <p>
                 CSS使用<span class="code">@keyframes规则</span>来设定动画代码<br>
                 使用语法为<span class="code">@keyframes 动画名 { css代码 }</span><br>
