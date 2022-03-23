@@ -151,6 +151,7 @@
                 记得要在切换分支之前提交在当前分支做的操作，否则一些操作可能会丢失<br><br>
 
                 <b>删除分支：</b> <span class="code">git branch -d branchname</span><br><br>
+		<b>重命名分支: </b> <span class="code">git branch -m 旧名 新名</span><br><br>
 
                 <b>合并分支：</b> <span class="code">git merge branchname</span><br>
                 该指令会将指定分支的文件合并到当前工作的分支当中。（或者说是将另一个分支的文件删除或复制过来，以保证两边的文件是一致的）<br>
@@ -221,7 +222,8 @@
             </p>
             <p>
                 <b>提取远程仓库时</b>，要先使用 <span class="code">git fetch 远程仓库别名 [远程分支]</span> 来拉取远程代码到本地的分支当中<br>
-                之后使用 <span class="code">git merge 仓库别名简称/分支 </span>将刚刚拉取到的内容合并到当前分支中。
+		之后使用 <span class="code">git merge 仓库别名简称/分支 </span>将刚刚拉取到的内容合并到当前分支中。<br>
+		当然，也可直接使用 <span class="code">git pull 仓库别名 远程分支</span> 来完成拉取并合并整个步骤
             </p>
             <p>
                 <b>需要向远程仓库更新数据时</b>，使用 <span class="code">git push [alias] [branch]</span><br>

@@ -170,6 +170,7 @@
                 <b>停止容器：</b><span class="code">docker stop 容器</span><br>
                 <b>删除容器：</b><span class="code">docker rm 容器</span>只能删除已经终止的容器，或通过 -f 强制删除<br>
                 <b>清理终止容器：</b><span class="code">docker container prune</span><br>
+		<b>容器内外传输文件: </b><span class="code">docker cp 源路径 容器:目的路径</span>(或反过来)<br>
                 <b>查看容器到主机的端口映射：</b><span class="code">docker port</span><br>
             </p>
             <hr>
@@ -193,7 +194,7 @@
                 dockerfile 文件中可以包含但不限于以下内容：<br>
                 <ul>
                     <li><b>FROM 基准镜像</b>: 以一个镜像为基准制作新的镜像</li>
-                    <li><b>COPY 源 目的</b>: 将源路径下的文件（除了.dockerignore 排除的路径），都拷贝进入 image 文件的目的路径中。</li>
+                    <li><b>COPY 源 目的</b>: 将上下文路径(一般为当前工作路径)下的文件（除了.dockerignore 排除的路径），都拷贝进入 image 文件的目的路径中。</li>
                     <li><b>ADD 源 目的</b>: 添加文件，如果是压缩文件也解压</li>
                     <li><b>WORKDIR 路径</b>: 指定接下来的工作路径为 指定路径。</li>
                     <li><b>RUN 命令</b>: 在打包时要执行的命令，会在生成 image 文件时触发，可以用来安装依赖。连续的命令尽可能用命令分隔、连接符等，而不是写多行 RUN</li>
