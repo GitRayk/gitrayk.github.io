@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <!-- meta使用viewport来适配移动端浏览器 -->
+    <link rel="icon" href="../../../img/icon.png">
+    <link rel="stylesheet" href="../../../sheet.css" type="text/css" class="sheet">
+    <link rel="stylesheet" href="../../../mobile-sheet.css" type="text/css">
+    <script src="../../../skin.js"></script>
+    <script src="../../../prepareBeforeStart.js"></script>
+    <title>virtualenv | 尼伯龙根</title>
+</head>
+
+<body onload="readyForRead()">
+    <div class="head-title">
+        <a href="../../../index.html"><img src="../../../img/icon.png" width="30" height="30" alt="icon" style="vertical-align:text-bottom;"/><span style="font-size: 20px;"> Niebelungen尼伯龙根</span></a>
+        <span>
+		&nbsp;&nbsp;&nbsp;<a href="../../article.html" class="hyperlink" style="border-bottom: 2px solid rgb(50, 50, 105);">贴文</a>
+		&nbsp;&nbsp;&nbsp;<a href="../../../about/about.html" class="hyperlink" id="about">关于</a>
+	    </span> 
+        <a href="javascript:void(0);" title="更换皮肤"><img src="../../../img/sun and moon.png" alt="暗夜模式" id="shift-skin" onclick="clickSkin()" style="width: 20px; height: 20px"></a>
+    </div>
+    
+    <div class="nav-article">
+        <p>Category:</p>
+        <ul>
+            <div class="dropdown web">
+                <li>Web开发</li>
+                <div class="dropdown-content-web">
+                    <ul>
+                        <li><a href="../../css/css-index.html">CSS</a></li>
+                        <li><a href="../../html/html-index.html">HTML</a></li>
+                        <li><a href="../../javascript/index-js.html">JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown daily">
+                <li>日常</li>
+                <div class="dropdown-content-daily">
+                    <ul>
+                        <li><a href="../../travels/travels-index.html">游记</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <li>编程</li>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="./python-index.html">Python</a></li>
+                        <li><a href="../c/c-index.html">C/C++</a></li>
+                        <li><a href="../others/others-index.html">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <li><a href="../../unclassified/unclassified-index.html">未分类</a></li>
+            </div>
+        </ul>
+    </div>
+
+    <div class="article">
+        <h1>virtualenv - Python 虚拟环境</h1><hr>
+        <div class="article-text">
+            <h4 class="date">2023-4-16</h4>
+            <h2>virtualenv 介绍</h2>
+            <p>
+                在实际开发过程中，经常会遇到不同的项目依赖的 Python 版本不一致的问题<br>
+                除了通过<span class="code">update-alternatives</span> 命令来管理软件版本外，Python 还可以使用 virtualenv 来创建不同的虚拟环境<br>
+            </p>
+            <p>
+                为了使用<span class="code">virtualenv</span>，我们可以通过 apt 进行安装：<br>
+                <pre>sudo apt install virtualenv</pre>
+            </p>
+            <h2>使用虚拟环境</h2>
+            <p>
+                首先我们需要创建一个虚拟环境，只需要使用如下命令：<br>
+                <pre>virtualenv -p python解释器路径 虚拟环境名</pre>
+                之后便会在当前工作路径下新建一个与虚拟环境名同名的目录，
+                所有虚拟环境所需要的文件都包含在其中
+            </p>
+            <p>
+                要想使用指定的虚拟环境，可以使用点命令来使用虚拟配置：<br>
+                <pre>source 虚拟环境路径/bin/activate</pre>
+                之后命令行的开头都会显示当前所使用的虚拟环境名
+            </p>
+            <p>
+                在虚拟环境中使用 pip 安装的包都不会被全局使用
+            </p>
+            <h2>退出及删除</h2>
+            <p>
+                当想要推出当前的虚拟环境时，只需要执行以下命令：<br>
+                <pre>deactivate</pre>
+            </p>
+            <p>
+                如果一个虚拟环境不再被使用，只需要删除其虚拟环境目录即可
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
