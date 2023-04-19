@@ -62,14 +62,15 @@
     <div class="article">
         <h1>Pip使用</h1><hr>
         <div class="article-text">
+            <h2>基础用法</h2>
             <p>
                 pip命令是在python中用于安装及维护python包的，当我们需要使用一个新的模块时，pip的使用是很有必要的
             </p>
             <hr>
             <p>
-                查看pip版本：<span class="code">pip --version</span><br>
+                查看pip版本：<span class="code">pip --version</span> 或 <span class="code">pip -V</span><br>
                 安装包：<span class="code">pip install package_name</span>且默认为最新版本，可以通过<span class="code">pip install package_name==version</span>来指定安装包的版本<br>
-                升级包：<span class="code">pip install --upgrade package_name</span>同样可以指定版本号<br>
+                升级包：<span class="code">pip install --upgrade package_name</span> 或 <span class="code">pip install -U package_name</span>同样可以指定版本号<br>
                 卸载包：<span class="code">pip uninstall package_name</span><br>
                 列出已安装的包：<span class="code">pip list</span><br>
                 查看可升级的包：<span class="code">pip list -o</span><br>
@@ -79,6 +80,7 @@
                 查看更多pip指令：<span class="code">pip -h</span>
             </p>
             <hr>
+            <h2>下载源问题</h2>
             <p>
                 在使用pip时还要面临一个问题，就是默认的下载源不在国内，所以下载请求经常超时或速度极慢，建议使用<span class="code">-i参数</span>指定pip源并用<span>--trusted-host参数</span>信任该域名<br>
                 <br>国内常用的镜像有：
@@ -87,6 +89,15 @@
                     <li>清华：https://pypi.tuna.tsinghua.edu.cn/simple</li>
                 </ol>
 		故其具体代码为<span class="code">pip install -i https://pypi.doubanio.com/simple --trusted-host pypi.doubanio.com package_name</span>
+            </p>
+            <hr>
+            <h2>pip 与 python 版本不一致的问题</h2>
+            <p>
+                我找到两种解决办法：
+                <ol>
+                    <li>使用<span class="code">python -m pip</span>，这样就可以使用 python 对应的 pip</li>
+                    <li>找到 pip 文件，修改其内容(pip 脚本的第一行指定了启动的 python 解释器的路径)</li>
+                </ol>
             </p>
         </div>
     </div>
