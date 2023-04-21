@@ -4,8 +4,6 @@
 
 <?php 
 echo "Hello World!"; 
-
-return 0;
 ?> 
 
 </body> 
